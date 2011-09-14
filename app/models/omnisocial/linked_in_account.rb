@@ -7,7 +7,7 @@ module Omnisocial
       self.access_token        = auth_hash['credentials']['token']
       self.access_token_secret = auth_hash['credentials']['secret']
     end
-  
+
     def account_url
       "http://www.linkedin.com/profile/view?id=#{self.remote_account_id}"
     end

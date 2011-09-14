@@ -1,5 +1,3 @@
-require 'digest/md5'
-
 module Omnisocial
   class GithubAccount < LoginAccount
     def assign_account_info(auth_hash)

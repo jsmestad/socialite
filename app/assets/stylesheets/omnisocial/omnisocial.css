@@ -4,6 +4,7 @@ a.omnisocial-button {
   margin-left: 20px;
   margin-right: 20px;
 }
+
 a.omnisocial-button.twitter {
   margin-left: 0;
 }
@@ -15,7 +16,7 @@ a.omnisocial-button span {
   border: 1px solid #bbe2f8;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
-  border-radius: 3px;  
+  border-radius: 3px;
   background: #3583cf;
   background: -webkit-gradient(linear, left top, left bottom, from(#629ed9), to(#3583cf));
   font-weight: bold;
@@ -26,6 +27,7 @@ a.omnisocial-button span {
   text-shadow: rgba(0, 0, 0, 0.4) 0 -1px 0px;
   cursor: pointer;
 }
+
 a:hover.omnisocial-button span {
   text-shadow: rgba(0, 0, 0, 0.4) 0 -1px 0px;
   background: #6ca520;

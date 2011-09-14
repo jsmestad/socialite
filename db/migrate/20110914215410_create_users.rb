@@ -1,5 +1,5 @@
-class CreateOmnisocialTables < ActiveRecord::Migration
-  def self.up
+class CreateUsers < ActiveRecord::Migration
+  def up
     create_table :users do |t|
       t.string :remember_token
       # Any additional fields here
@@ -16,17 +16,16 @@ class CreateOmnisocialTables < ActiveRecord::Migration
       t.string :picture_url
       t.string :access_token
       t.string :access_token_secret
-      # Any additional fields here 
+      # Any additional fields here
 
       t.timestamps
     end
 
     add_index :login_accounts, :user_id
     add_index :login_accounts, :type
-
   end
 
-  def self.down
+  def down
     remove_index :login_accounts, :type
     remove_index :login_accounts, :user_id
     drop_table :login_accounts

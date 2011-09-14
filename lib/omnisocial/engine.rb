@@ -1,14 +1,8 @@
 require 'omnisocial'
 
-require 'rails'
-require 'action_controller'
-
-require 'omniauth/core'
-require 'omniauth/oauth'
-require 'bcrypt'
-
 module Omnisocial
   class Engine < Rails::Engine
+    isolate_namespace Omnisocial
 
     config.to_prepare do
       ApplicationController.helper(Omnisocial::AuthHelper)

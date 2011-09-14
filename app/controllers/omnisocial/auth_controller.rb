@@ -1,6 +1,5 @@
 module Omnisocial
   class AuthController < ApplicationController
-
     unloadable
 
     def new
