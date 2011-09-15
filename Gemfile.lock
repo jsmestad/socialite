@@ -2,6 +2,7 @@ PATH
   remote: .
   specs:
     omnisocial (0.2.0)
+      bcrypt-ruby (~> 3.0.0)
       oa-core (~> 0.3.0.rc3)
       oa-oauth (~> 0.3.0.rc3)
       rails (~> 3.1.0)

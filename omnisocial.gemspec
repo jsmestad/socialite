@@ -1,6 +1,3 @@
-lib = File.expand_path('../lib/', __FILE__)
-$:.unshift(lib) unless $:.include?(lib)
-
 $:.push File.expand_path("../lib", __FILE__)
 
 # Maintain your gem's version:
@@ -19,9 +16,10 @@ Gem::Specification.new do |gem|
   # gem.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
   gem.files = `git ls-files`.split("\n")
 
-  gem.add_dependency 'rails', '~> 3.1.0'
-  gem.add_dependency 'oa-core', '~> 0.3.0.rc3'
-  gem.add_dependency 'oa-oauth', '~> 0.3.0.rc3'
+  gem.add_dependency 'rails',       '~> 3.1.0'
+  gem.add_dependency 'bcrypt-ruby', '~> 3.0.0'
+  gem.add_dependency 'oa-core',     '~> 0.3.0.rc3'
+  gem.add_dependency 'oa-oauth',    '~> 0.3.0.rc3'
 
   gem.add_development_dependency 'sqlite3'
   gem.add_development_dependency 'yard'

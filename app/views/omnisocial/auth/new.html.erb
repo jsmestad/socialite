@@ -1,14 +1,15 @@
-<div id="omnisocial-login">
+<div id='omnisocial-login'>
   <% if flash[:error] -%>
-    <div class="error">
+    <div class='error'>
       <p>
         <%= flash[:error] %>
       </p>
     </div>
   <% end -%>
-  <div class="information">
+
+  <div class='information'>
     <h1>Sign in (or up)</h1>
-    <p class="large">
+    <p class='large'>
       You can use either your Twitter, Facebook, Github, or LinkedIn account to sign in or sign up.
     </p>
     <p>
@@ -18,6 +19,7 @@
       It&#8217;ll only take a second and your information will be perfectly safe. We don't get access to your password and <em>we won't post or tweet anything from your account</em> without your explicit permission.
     </p>
   </div>
+
   <%= twitter_login_button %>
   <%= facebook_login_button %>
   <%= github_login_button %>
