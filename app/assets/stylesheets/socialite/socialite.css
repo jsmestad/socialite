@@ -1,15 +1,15 @@
-a.omnisocial-button {
+a.socialite-button {
   float: left;
   text-decoration: none;
   margin-left: 20px;
   margin-right: 20px;
 }
 
-a.omnisocial-button.twitter {
+a.socialite-button.twitter {
   margin-left: 0;
 }
 
-a.omnisocial-button span {
+a.socialite-button span {
   display: inline-block;
   margin-top: 1px;
   padding: 8px 10px 9px;
@@ -28,7 +28,7 @@ a.omnisocial-button span {
   cursor: pointer;
 }
 
-a:hover.omnisocial-button span {
+a:hover.socialite-button span {
   text-shadow: rgba(0, 0, 0, 0.4) 0 -1px 0px;
   background: #6ca520;
   background: -webkit-gradient(linear, left top, left bottom, from(#90bb58), to(#6ca520));

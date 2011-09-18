@@ -1,8 +1,8 @@
-module Omnisocial
+module Socialite
   class User < ActiveRecord::Base
     self.abstract_class = true
 
-    has_one :login_account, :class_name => 'Omnisocial::LoginAccount', :dependent => :destroy
+    has_one :login_account, :class_name => 'Socialite::LoginAccount', :dependent => :destroy
     delegate :login, :name, :picture_url, :account_url, :access_token, :access_token_secret, :to => :login_account
 
     def to_param
@@ -30,7 +30,7 @@ module Omnisocial
     end
 
     def remember
-      update_attributes(:remember_token => ::BCrypt::Password.create("#{Time.now}-#{self.login_account.type}-#{self.login}")) unless new_record?
+      update_attributes(:remember_token => BCrypt::Password.create("#{Time.now}-#{self.login_account.type}-#{self.login}")) unless new_record?
     end
 
     def forget

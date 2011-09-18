@@ -1,6 +1,6 @@
 require 'ostruct'
 
-module Omnisocial
+module Socialite
   class ServiceConfig < OpenStruct
     def initialize(app_key, app_secret, options)
       super({

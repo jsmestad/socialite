@@ -1,20 +1,20 @@
 $:.push File.expand_path("../lib", __FILE__)
 
 # Maintain your gem's version:
-require 'omnisocial/version'
+require 'socialite/version'
 
 Gem::Specification.new do |gem|
-  gem.name          = 'omnisocial'
-  gem.version       = Omnisocial::VERSION
+  gem.name          = 'socialite'
+  gem.version       = Socialite::VERSION
   gem.platform      = Gem::Platform::RUBY
-  gem.authors       = ['Tim Riley']
-  gem.email         = 'tim@openmonkey.com'
-  gem.homepage      = 'http://github.com/icelab/omnisocial'
-  gem.summary       = 'Twitter and Facebook logins for your Rails application.'
-  gem.description   = 'Twitter and Facebook logins for your Rails application.'
+  gem.authors       = ['Justin Smestad']
+  gem.email         = 'justin.smestad@gmail.com'
+  gem.homepage      = 'http://github.com/jsmestad/socialite'
+  gem.summary       = 'Rails engine supporting multiple auth providers per user.'
+  gem.description   = 'Rails engine supporting multiple auth providers per user.'
 
-  # gem.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
-  gem.files = `git ls-files`.split("\n")
+  gem.files = Dir["{app,config,db,lib}/**/*"] + ["LICENSE", "Rakefile", "README.md"]
+  # gem.files = `git ls-files`.split("\n")
 
   gem.add_dependency 'rails',       '~> 3.1.0'
   gem.add_dependency 'bcrypt-ruby', '~> 3.0.0'

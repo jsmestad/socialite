@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    omnisocial (0.2.0)
+    socialite (0.1.0.alpha)
       bcrypt-ruby (~> 3.0.0)
       oa-core (~> 0.3.0.rc3)
       oa-oauth (~> 0.3.0.rc3)
@@ -167,8 +167,8 @@ DEPENDENCIES
   capybara (~> 1.1.1)
   cucumber-rails (~> 1.0.4)
   launchy (~> 2.0.5)
-  omnisocial!
   rspec-rails (~> 2.6.1)
   selenium-webdriver (>= 2.4.0)
+  socialite!
   sqlite3
   yard

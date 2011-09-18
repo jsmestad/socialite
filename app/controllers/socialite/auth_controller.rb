@@ -1,4 +1,4 @@
-module Omnisocial
+module Socialite
   class AuthController < ApplicationController
     unloadable
 
@@ -12,13 +12,13 @@ module Omnisocial
     def callback
       account = case request.env['omniauth.auth']['provider']
         when 'twitter' then
-          Omnisocial::TwitterAccount.find_or_create_from_auth_hash(request.env['omniauth.auth'])
+          Socialite::TwitterAccount.find_or_create_from_auth_hash(request.env['omniauth.auth'])
         when 'facebook' then
-          Omnisocial::FacebookAccount.find_or_create_from_auth_hash(request.env['omniauth.auth'])
+          Socialite::FacebookAccount.find_or_create_from_auth_hash(request.env['omniauth.auth'])
         when 'linked_in' then
-          Omnisocial::LinkedInAccount.find_or_create_from_auth_hash(request.env['omniauth.auth'])
+          Socialite::LinkedInAccount.find_or_create_from_auth_hash(request.env['omniauth.auth'])
         when 'github' then
-          Omnisocial::GithubAccount.find_or_create_from_auth_hash(request.env['omniauth.auth'])
+          Socialite::GithubAccount.find_or_create_from_auth_hash(request.env['omniauth.auth'])
       end
 
       self.current_user = account.find_or_create_user
