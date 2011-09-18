@@ -14,7 +14,7 @@ To use Socialite in a Rails 3.1 application:
 * Require it in the Gemfile: `gem 'socialite'`
 * Install it by running `bundle`.
 * Import migrations into the parent project with `rake
-  Socialite:install:migrations`
+  socialite:install:migrations`
 * Use the provided CSS by adding `//= require socialite` from your
   application's CSS manifest file
 
