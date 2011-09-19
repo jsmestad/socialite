@@ -1,30 +1,29 @@
 module Socialite
-  class Authorization < ActiveRecord::Base
+  class Identity < ActiveRecord::Base
     belongs_to :user, :inverse_of => :identities
     serialize :auth_hash
 
-    def self.find_or_create_from_auth_hash(auth_hash)
-      if account = find_by_uid(auth_hash['uid'])
-        account.assign_account_info(auth_hash)
-        account.save
-        account
-      else
-        create_from_auth_hash(auth_hash)
-      end
+    # Before saving an identity, we ensure that the provider name
+    # is downcased. This avoids any issue when using PostgreSQL
+    # without ILIKE logic.
+    before_save do |identity|
+      identity.provider = identity.provider.downcase
     end
 
-    def self.create_from_auth_hash(auth_hash)
-      create do |account|
-        account.assign_account_info(auth_hash)
-      end
-    end
+    # Setup common named scopes for officially supported providers
+    scope :facebook, where(:provider => 'facebook')
+    scope :twitter, where(:provider => 'twitter')
 
-    def find_or_create_user
-      return self.user if self.user
+    # Ensure each user has only a single identity per provider type
+    validates :provider,
+      :uniqueness => {:scope => :user_id, :case_sensitive => false},
+      :presence => true
 
-      User.create do |user|
-        user.login_account = self
-      end
-    end
+    # Ensure an identity is never reused by another account
+    validates :unique_id,
+      :uniqueness => {:scope => :provider},
+      :presence => true
+
+    validates_associated :user
   end
 end

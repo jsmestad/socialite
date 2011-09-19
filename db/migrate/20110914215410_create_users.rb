@@ -1,6 +1,6 @@
 class CreateUsers < ActiveRecord::Migration
   def up
-    create_table :users do |t|
+    create_table :socialite_users do |t|
       t.string :remember_token
       # Any additional fields here
 
@@ -9,6 +9,6 @@ class CreateUsers < ActiveRecord::Migration
   end
 
   def down
-    drop_table :users
+    drop_table :socialite_users
   end
 end

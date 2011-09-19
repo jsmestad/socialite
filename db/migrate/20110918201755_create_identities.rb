@@ -1,26 +1,26 @@
 class CreateIdentities < ActiveRecord::Migration
   def up
-    create_table :identities do |t|
-      t.string :type
-      t.integer :user_id
-      t.string :uid
-      t.string :name
-      t.string :login
-      t.string :picture_url
+    create_table :socialite_identities do |t|
+      t.integer :user_id, :null => false
+      t.string :unique_id, :null => false
+      t.string :provider, :null => false
       t.string :access_token
       t.string :access_token_secret
+      t.text :auth_hash
       # Any additional fields here
 
       t.timestamps
     end
 
-    add_index :identities, :user_id
-    add_index :identities, :type
+    add_index :socialite_identities, :user_id
+    add_index :socialite_identities, [:user_id, :provider], :unique => true
+    add_index :socialite_identities, [:provider, :unique_id], :unique => true
   end
 
   def down
-    remove_index :identities, :type
-    remove_index :identities, :user_id
-    drop_table :identities
+    remove_index :socialite_identities, :user_id
+    remove_index :socialite_identities, [:user_id, :provider]
+    remove_index :socialite_identities, [:user_id, :unique_id]
+    drop_table :socialite_identities
   end
 end

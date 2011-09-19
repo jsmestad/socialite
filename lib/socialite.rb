@@ -1,9 +1,8 @@
+require 'socialite/controller_support'
+require 'socialite/service_config'
 require 'socialite/engine'
 
 module Socialite
-  require 'socialite/service_config'
-
-  # Twitter & Facebook app configs
   mattr_accessor :service_configs
   @@service_configs = {}
 
@@ -28,5 +27,3 @@ module Socialite
     @@service_configs[:github] = ServiceConfig.new(app_key, app_secret, options)
   end
 end
-
-require 'extensions/action_controller/base'

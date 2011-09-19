@@ -2,31 +2,22 @@ module Socialite
   class User < ActiveRecord::Base
     self.abstract_class = true
 
-    has_one :login_account, :class_name => 'Socialite::LoginAccount', :dependent => :destroy
-    delegate :login, :name, :picture_url, :account_url, :access_token, :access_token_secret, :to => :login_account
+    has_many :identities, :inverse_of => :user, :dependent => :destroy
 
-    def to_param
-      if !self.login.include?('profile.php?')
-        "#{self.id}-#{self.login.gsub('.', '-')}"
-      else
-        self.id.to_s
-      end
+    def facebook_identities
+      find_identities('twitter')
     end
 
-    def from_twitter?
-      login_account.kind_of? TwitterAccount
+    def facebook
+      facebook_identities.first
     end
 
-    def from_facebook?
-      login_account.kind_of? FacebookAccount
+    def twitter_identities
+      find_identities('twitter')
     end
 
-    def from_linked_in?
-      login_account.kind_of? LinkedInAccount
-    end
-
-    def from_github?
-      login_account.kind_of? GithubAccount
+    def twitter
+      twitter_identities.first
     end
 
     def remember
@@ -35,6 +26,12 @@ module Socialite
 
     def forget
       update_attributes(:remember_token => nil) unless new_record?
+    end
+
+  protected
+
+    def find_identities(name)
+      self.identities.send(name.to_sym).order('created_at DESC').all
     end
   end
 end
