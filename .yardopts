@@ -1,0 +1,8 @@
+'lib/**/*.rb'
+'app/**/*.rb'
+'config/**/*.rb'
+'db/**/*.rb'
+README.md
+LICENSE
+--protected
+--no-private
