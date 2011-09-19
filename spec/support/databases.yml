@@ -5,7 +5,7 @@ sqlite:
   timeout: 500
 mysql:
   adapter: mysql2
-  database: myapp_test
+  database: socialite_test
   username: 
   encoding: utf8
 postgres:

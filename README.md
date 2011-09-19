@@ -7,6 +7,19 @@ Twitter, Facebook, Github and LinkedIn.
 Additional authorizations can be added if they are supported by
 the [OmniAuth](http://github.com/intridea/omniauth) project.
 
+## Development
+
+We are currently working on an initial release of Socialite. Once we
+have a solid suite of tests in place, we will release an official 0.1.0
+version to the public.
+
+## Resources
+
+* [Documentation](http://rdoc.info/github/jsmestad/socialite/master/frames)
+* [Travis CI Project](http://travis-ci.org/#!/jsmestad/socialite)
+* [Issue Tracker](https://github.com/jsmestad/socialite/issues)
+* [Gem Releases](https://rubygems.org/gems/socialite)
+
 ## Installation
 
 To use Socialite in a Rails 3.1 application:
