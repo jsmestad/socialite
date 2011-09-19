@@ -8,15 +8,15 @@ require 'rspec/rails'
 # Should matchers
 require 'shoulda/matchers'
 
-# Run any available migration
-ActiveRecord::Migrator.migrate File.expand_path('../dummy/db/migrate/', __FILE__)
-
 # Load support files
 Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }
 
 # Load factories
 require 'factory_girl'
 Dir["#{File.dirname(__FILE__)}/factories/**/*.rb"].each { |f| require f }
+
+# Run any available migration
+ActiveRecord::Migrator.migrate File.expand_path('../dummy/db/migrate/', __FILE__)
 
 RSpec.configure do |config|
   require 'rspec/expectations'
