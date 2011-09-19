@@ -1,2 +1,7 @@
-require 'autotest/growl'
-require 'autotest/fsevent'
+begin
+  require 'rubygems'
+  require 'autotest/growl'
+  require 'autotest/fsevent'
+rescue LoadError
+
+end
