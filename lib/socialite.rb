@@ -1,3 +1,4 @@
+require 'socialite/identity'
 require 'socialite/controller_support'
 require 'socialite/service_config'
 require 'socialite/engine'

@@ -21,6 +21,7 @@ ActiveRecord::Migrator.migrate File.expand_path('../dummy/db/migrate/', __FILE__
 RSpec.configure do |config|
   require 'rspec/expectations'
   config.include RSpec::Matchers
+  # config.include Socialite::Identity
 
   config.use_transactional_fixtures = true
 end
