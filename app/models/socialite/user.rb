@@ -1,7 +1,5 @@
 module Socialite
   class User < ActiveRecord::Base
-    self.abstract_class = true
-
     has_many :identities, :inverse_of => :user, :dependent => :destroy
 
     def facebook_identities
