@@ -2,10 +2,8 @@ module Socialite
   class TwitterIdentity < ActiveRecord::Base
     include Identity
 
-  protected
-
-    def api_connection
-
+    def account_url
+      @account_url ||= "http://twitter.com/#{self.login}"
     end
   end
 end

@@ -13,14 +13,15 @@ Gem::Specification.new do |gem|
   gem.summary       = 'Rails engine supporting multiple auth providers per user.'
   gem.description   = 'Rails engine supporting multiple auth providers per user.'
 
-  gem.files = Dir["{app,config,db,lib}/**/*"] + ["LICENSE", "Rakefile", "README.md"]
-  # gem.files = `git ls-files`.split("\n")
+  gem.files         = `git ls-files`.split("\n")
+  gem.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
+  gem.require_paths = ["lib"]
 
   gem.add_dependency 'rails',       '~> 3.1.0'
   gem.add_dependency 'bcrypt-ruby', '~> 3.0.0'
   gem.add_dependency 'oa-core',     '~> 0.3.0.rc3'
   gem.add_dependency 'oa-oauth',    '~> 0.3.0.rc3'
-  gem.add_dependency 'koala',       '~> 1.1.0'
+  gem.add_dependency 'koala',       '~> 1.2.0beta3'
 
   gem.add_development_dependency 'sqlite3'
   gem.add_development_dependency 'yard'
