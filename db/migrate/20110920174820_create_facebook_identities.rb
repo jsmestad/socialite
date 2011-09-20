@@ -4,8 +4,6 @@ class CreateFacebookIdentities < ActiveRecord::Migration
       t.integer :user_id, :null => false
       t.string :unique_id, :null => false
       t.string :provider, :null => false
-      t.string :access_token
-      t.string :access_token_secret
       t.text :auth_hash
       # Any additional fields here
 

@@ -9,6 +9,12 @@ module Socialite
       # Before saving an identity, we ensure that the provider name
       # is downcased. This avoids any issue when using PostgreSQL
       # without ILIKE logic.
+      before_validation do |identity|
+        if identity.auth_hash.present? and identity.auth_hash.has_key?('provider')
+          identity.provider = identity.auth_hash['provider']
+        end
+      end
+
       before_save do |identity|
         identity.provider = identity.provider.downcase
       end
@@ -31,7 +37,25 @@ module Socialite
     end
 
     module InstanceMethods
-      # Placeholder for any common instance methods
+      def access_token
+        credentials['token']
+      end
+
+      def access_token_secret
+        credentials['secret']
+      end
+
+      def credentials
+        auth_hash['credentials']
+      end
+
+      def nickname
+        user_info['nickname']
+      end
+
+      def user_info
+        auth_hash['user_info']
+      end
     end
   end
 end
