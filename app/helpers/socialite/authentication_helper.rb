@@ -13,10 +13,12 @@ module Socialite
     end
 
     def linkedin_login_button
+      raise NotImplementedError, 'socialite does not currently have support for LinkedIn yet.'
       content_tag(:a, content_tag(:span, 'Sign in with LinkedIn'), :class => 'socialite_button linkedin', :href => auth_request_path(:service => 'linked_in'), :rel => 'external')
     end
 
     def github_login_button
+      raise NotImplementedError, 'socialite does not currently have support for Github yet.'
       content_tag(:a, content_tag(:span, 'Sign in with Github'), :class => 'socialite_button github', :href => auth_request_path(:service => 'github'), :rel => 'external')
     end
   end
