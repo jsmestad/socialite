@@ -21,7 +21,8 @@ Gem::Specification.new do |gem|
   gem.add_dependency 'bcrypt-ruby', '~> 3.0.0'
   gem.add_dependency 'oa-core',     '~> 0.3.0.rc3'
   gem.add_dependency 'oa-oauth',    '~> 0.3.0.rc3'
-  gem.add_dependency 'koala',       '~> 1.2.0beta3'
+  gem.add_dependency 'koala',       '~> 1.2.0beta4'
+  gem.add_dependency 'grackle',     '~> 0.1.10'
 
   gem.add_development_dependency 'sqlite3'
   gem.add_development_dependency 'yard'
