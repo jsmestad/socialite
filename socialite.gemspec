@@ -18,6 +18,8 @@ Gem::Specification.new do |gem|
   gem.require_paths = ["lib"]
 
   gem.add_dependency 'rails',       '~> 3.1.0'
+  gem.add_dependency 'sass-rails',  '~> 3.1.0'
+  gem.add_dependency 'haml',        '~> 3.1.2'
   gem.add_dependency 'bcrypt-ruby', '~> 3.0.0'
   gem.add_dependency 'oa-core',     '~> 0.3.0.rc3'
   gem.add_dependency 'oa-oauth',    '~> 0.3.0.rc3'
