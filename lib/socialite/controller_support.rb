@@ -22,11 +22,20 @@ module Socialite
 
       # Filters
 
-      # Conditional check to see if a current user exists
+      # Conditional check to see ensure a current user exists
       #
       # @return [Boolean]
-      def require_user
-        current_user.present? || deny_access
+      # (see #current_user?)
+      def ensure_user
+        current_user? || deny_access('You must be logged in to perform this action.')
+      end
+
+      # Conditional check to see ensure there is no current user
+      #
+      # @return [Boolean]
+      # (see #current_user?)
+      def ensure_no_user
+        current_user? || deny_access('You are already logged in.')
       end
 
       # Utils
@@ -41,10 +50,12 @@ module Socialite
       # Stores the URL for the current requested action, then redirects to
       # the login page.
       #
+      # @param [String] optional flash message to pass to the user
       # @note This method sets the redirect path, but does not return false.
       # Meaning you can perform actions after this method is invoked.
-      def deny_access
+      def deny_access(message=nil)
         store_location
+        flash_message :notice, message if message.present?
         redirect_to login_path
       end
 
@@ -64,10 +75,10 @@ module Socialite
       # (see #current_user=)
       def current_user
         @current_user ||= if session[:user_id]
-          User.find(session[:user_id])
-        elsif cookies[:remember_token]
-          User.find_by_remember_token(cookies[:remember_token])
-        end
+                            User.find(session[:user_id])
+                          elsif cookies[:remember_token]
+                            User.find_by_remember_token(cookies[:remember_token])
+                          end
       end
 
       # Assign the User model associated with the current session.
