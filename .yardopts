@@ -2,7 +2,7 @@
 'app/**/*.rb'
 'config/**/*.rb'
 'db/**/*.rb'
-README.md
-LICENSE
+- README.md
+- LICENSE
 --protected
 --no-private

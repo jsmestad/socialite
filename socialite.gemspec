@@ -26,11 +26,13 @@ Gem::Specification.new do |gem|
 
   gem.add_development_dependency 'sqlite3'
   gem.add_development_dependency 'yard'
+  gem.add_development_dependency 'rdiscount'
   gem.add_development_dependency 'rspec-rails', '~> 2.6.1'
   gem.add_development_dependency 'factory_girl', '~> 2.1.0'
   gem.add_development_dependency 'shoulda-matchers'
   gem.add_development_dependency 'capybara', '~> 1.1.1'
   gem.add_development_dependency 'cucumber-rails', '~> 1.0.4'
+  gem.add_development_dependency 'database_cleaner', '~> 0.6.7'
   gem.add_development_dependency 'selenium-webdriver', '>= 2.4.0'
   gem.add_development_dependency 'launchy', '~> 2.0.5'
 end
