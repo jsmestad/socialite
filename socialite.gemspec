@@ -25,6 +25,7 @@ Gem::Specification.new do |gem|
 
   gem.add_development_dependency 'sqlite3'
   gem.add_development_dependency 'yard'
+  gem.add_development_dependency 'rdiscount'
   gem.add_development_dependency 'rspec-rails', '~> 2.6.1'
   gem.add_development_dependency 'factory_girl', '~> 2.1.0'
   gem.add_development_dependency 'shoulda-matchers'
