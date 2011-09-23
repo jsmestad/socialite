@@ -19,6 +19,8 @@ version to the public.
 * [Travis CI Project](http://travis-ci.org/#!/jsmestad/socialite)
 * [Issue Tracker](https://github.com/jsmestad/socialite/issues)
 * [Gem Releases](https://rubygems.org/gems/socialite)
+* [Staging Testbed](http://socialite-gem.herokuapp.com)
+* [Facebook Testbed](https://www.facebook.com/apps/application.php?id=281326728563029)
 
 ## Installation
 

@@ -27,7 +27,7 @@ module Socialite
       # @return [Boolean]
       # (see #current_user?)
       def ensure_user
-        current_user? || deny_access('You must be logged in to perform this action.')
+         current_user? || deny_access('You must be logged in to perform this action.')
       end
 
       # Conditional check to see ensure there is no current user
@@ -35,7 +35,7 @@ module Socialite
       # @return [Boolean]
       # (see #current_user?)
       def ensure_no_user
-        current_user? || deny_access('You are already logged in.')
+         !current_user? || redirect_back_or_default(Socialite.root_path)
       end
 
       # Utils
@@ -87,7 +87,7 @@ module Socialite
       # (see #current_user)
       def current_user=(user)
         user.tap do |user|
-          user.remember
+          user.remember_me!
           session[:user_id]         = user.id
           cookies[:remember_token]  = user.remember_token
         end
@@ -108,9 +108,9 @@ module Socialite
       # @return [Hash] the modified session object
       def logout!
         session[:user_id] = nil
-        @current_user     = nil
-        cookies.delete(:remember_token)
         session[:return_to] = nil
+        @current_user = nil
+        cookies.delete(:remember_token)
       end
     end
   end

@@ -1,35 +1,36 @@
 module Socialite
   class IdentitiesController < ApplicationController
-    unloadable
+    # unloadable
 
-    before_filter :require_sign_in, :only => [:index, :destroy]
-
+    before_filter :ensure_user, :only => [:destroy]
     respond_to :html, :json
 
-    def index
-      respond_with(identities)
-    end
+    def create
+      auth_hash = request.env['omniauth.auth']
+      identity = Identity.find_or_initialize_by_oauth(auth_hash)
+      identity.build_user if identity.user.blank?
 
-    def callback
-      provider = request.env['omniauth.auth']['provider']
-      user = User.create_or_update_by_identity(provider, request.env['omniauth.auth'])
-      if user.save
+      if identity.save
         self.current_user ||= identity.user
         flash_message :notice, 'You have logged in successfully.'
       else
         flash_message :error, 'An error occurred. Please try again.'
       end
-      respond_with(identity, :location => redirect_back_or_default(root_path))
+      redirect_to Socialite.root_path
     end
 
     def failure
       flash_message :error, 'We had trouble signing you in. Did you make sure to grant access? Please select a service below and try again.'
-      render :action => 'new'
+      redirect_to Socialite.root_path
     end
 
     def destroy
-      identity.destroy
-      respond_with(identity, :location => redirect_back_or_default(root_path))
+      if identity.destroy
+        flash_message :notice, 'Identity has been unlinked.'
+      else
+        flash_message :error, 'We had trouble unlinking this service.'
+      end
+      respond_with(identity, :location => redirect_back_or_default(Socialite.root_path))
     end
 
     private
@@ -39,7 +40,7 @@ module Socialite
       end
 
       def identity
-        @identity = current_user.identities.find(params[:identity_id] || params[:id])
+        @identity = current_user.identities.find(params[:id])
       end
   end
 end

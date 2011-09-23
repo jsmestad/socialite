@@ -19,8 +19,8 @@ Gem::Specification.new do |gem|
 
   gem.add_dependency 'rails',       '~> 3.1.0'
   gem.add_dependency 'sass-rails',  '~> 3.1.0'
+  gem.add_dependency 'simple_form', '~> 1.5.2'
   gem.add_dependency 'haml',        '~> 3.1.2'
-  gem.add_dependency 'bcrypt-ruby', '~> 3.0.0'
   gem.add_dependency 'oa-core',     '~> 0.3.0.rc3'
   gem.add_dependency 'oa-oauth',    '~> 0.3.0.rc3'
   gem.add_dependency 'koala',       '~> 1.2.0beta4'

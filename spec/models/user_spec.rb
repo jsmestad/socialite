@@ -4,55 +4,24 @@ module Socialite
   describe User do
     let(:linked_user) { FactoryGirl.create(:linked_user) }
 
-    it { should have_many(:facebook_identities).dependent(:destroy) }
-    it { should have_many(:twitter_identities).dependent(:destroy) }
+    it { should have_many(:identities).dependent(:destroy) }
+    it { should have_one(:facebook_identity) }
+    it { should have_one(:twitter_identity) }
 
     context 'with associated identities' do
       subject { linked_user }
 
       before do
-        subject.facebook_identities.count.should eql(1)
-        subject.twitter_identities.count.should eql(1)
+        subject.identities.count.should eql(2)
       end
 
+      its('identities.count') { should eql(2) }
+
+      its(:facebook_identity) { should be_a(Socialite::Identity) }
       its(:facebook) { should be_a(Socialite::FacebookIdentity) }
-      its(:twitter) { should be_a(Socialite::TwitterIdentity) }
-    end
-  end
 
-  describe User, 'create or update by provider' do
-    before do
-      Socialite.const_defined?('FacebookIdentity').should be_true
-      Socialite.const_defined?('TwitterIdentity').should be_true
-    end
-
-    let(:auth_hash) do
-      {
-        'provider' => 'facebook',
-        'uid' => '555',
-        'credentials' => {
-          'token' => '123648493',
-          'secret' => '12477388272'
-        }
-      }
-    end
-
-    describe 'facebook' do
-      let(:facebook_identity) { User.create_or_update_by_identity('facebook', auth_hash) }
-      subject { facebook_identity }
-
-      it { should be_a(User) }
-      its(:persisted?) { should be_true }
-      its(:facebook) { should be_a(FacebookIdentity) }
-    end
-
-    describe 'twitter' do
-      let(:twitter_identity) { User.create_or_update_by_identity('twitter', auth_hash.merge('provider' => 'twitter')) }
-      subject { twitter_identity }
-
-      it { should be_a(User) }
-      its(:persisted?) { should be_true }
-      its(:twitter) { should be_a(TwitterIdentity) }
+      # its(:twitter_identity) { should be_a(Socialite::Identity) }
+      # its(:twitter) { should be_a(Socialite::TwitterIdentity) }
     end
   end
 end
