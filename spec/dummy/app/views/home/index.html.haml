@@ -1,0 +1,7 @@
+%h2 Unrestricted Dummy Homepage
+
+%a{:href => '/restricted'} Go to Restricted Page
+
+= link_to 'Login', login_path
+- if user_signed_in?
+  = link_to 'Logout', logout_path
