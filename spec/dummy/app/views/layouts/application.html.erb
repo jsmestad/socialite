@@ -8,6 +8,10 @@
 </head>
 <body>
 
+<% flash.keys.each do |type| %>
+  <div class="flash <%= type.to_s %>"><%=h flash[type].join('<br/>') %></div>
+<% end %>
+
 <%= yield %>
 
 </body>
