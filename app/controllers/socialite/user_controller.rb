@@ -15,14 +15,18 @@ module Socialite
 
     def update
       flash_message :notice, 'Your account has been removed along with any associated identities.'
-      respond_with(user, :location => redirect_back_or_default(user_path))
+      respond_with(user) do |format|
+        format.html { redirect_back_or_default(user_path) }
+      end
     end
 
     def destroy
       user.destroy
       logout!
       flash_message :notice, 'Your account has been removed along with any associated identities.'
-      respond_with(user, :location => redirect_back_or_default(user_path))
+      respond_with(user) do |format|
+        format.html { redirect_back_or_default(user_path) }
+      end
     end
 
   private
