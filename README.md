@@ -38,12 +38,14 @@ To use Socialite in a Rails 3.1 application:
 This project began as a fork of [Tim Riley](http://openmonkey.com)'s
 great Omnisocial plugin. The motivation for this fork is that I required
 multiple authorizations for each account (linking support) and wanted a
-proper Rails 3.1 Engine. Copyright of that original code (Omnisocial) is
-under the MIT License. This project will be released under the Apache
-2.0 License pending approval from Tim Riley and Icelab. Until then, I
-will keep the MIT License.
+proper Rails 3.1 Engine.
 
-# Omnisocial Contributers
+## Socialite Contributers
+
+* [Justin Smestad](http://github.com/jsmestad)
+* [Bobby Wilson](http://github.com/bobbyw)
+
+### Omnisocial Contributers
 
 * [Klaus Hartl](http://github.com/carhartl)
 * [Stephen Aument](http://github.com/stephenaument)
@@ -52,7 +54,10 @@ will keep the MIT License.
 * [Pablo Dejuan](http://github.com/pdjota)
 * [Chris Oliver](http://github.com/excid3)
 
-## Omnisocial Copyright & License
+## Copyright & License
 
-OmniSocial is Copyright (c) 2010-2011 [Tim Riley](http://openmonkey.com/)
+Socialite is Copyright (c) 2011 Justin Smestad. All Rights are Reserved. Code is 
+distributed under the Apache 2.0 License. See LICENSE file for more information.
+
+The original OmniSocial code is Copyright (c) 2010-2011 [Tim Riley](http://openmonkey.com/)
 and [Icelab](http://icelab.com.au/), and is released under MIT License.
