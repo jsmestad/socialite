@@ -5,6 +5,6 @@ Socialite::Engine.routes.draw do
   match '/logout'                 => 'session#destroy',  :as => :logout
 
   resource :user, :controller => 'user', :except => [:new, :create] do
-    resources :identities#, :only => [:show, :destroy]
+    resources :identities
   end
 end

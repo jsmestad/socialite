@@ -3,12 +3,29 @@ require 'omniauth/core'
 require 'omniauth/oauth'
 
 module Socialite
-  autoload :BaseIdentity, 'socialite/base_identity'
+  autoload :ControllerSupport, 'socialite/controller_support'
   autoload :ServiceConfig, 'socialite/service_config'
 
   module ApiWrappers
     autoload :Facebook, 'socialite/api_wrappers/facebook'
     autoload :Twitter, 'socialite/api_wrappers/twitter'
+  end
+
+  module Controllers
+    autoload :Helpers, 'socialite/controllers/helpers'
+    autoload :Identities, 'socialite/controllers/identities'
+    autoload :Session, 'socialite/controllers/session'
+    autoload :User, 'socialite/controllers/user'
+  end
+
+  module Helpers
+    autoload :Authentication, 'socialite/helpers/authentication.rb'
+  end
+
+  module Models
+    autoload :Identity, 'socialite/models/identity'
+    autoload :User, 'socialite/models/user'
+    autoload :FacebookIdentity, 'socialite/models/facebook_identity.rb'
   end
 
   mattr_accessor :service_configs, :root_path, :mount_prefix
@@ -33,5 +50,4 @@ module Socialite
   end
 end
 
-require 'socialite/controller_support'
 require 'socialite/engine'
