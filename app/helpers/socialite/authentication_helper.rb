@@ -1,7 +1,7 @@
 module Socialite
   module AuthenticationHelper
     def identity_request_path(options={})
-      "/auth/#{options[:service]}"
+      [Socialite.mount_prefix, 'auth', options[:service]].join('/')
     end
 
     def twitter_login_button

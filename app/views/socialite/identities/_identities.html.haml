@@ -4,11 +4,11 @@
     %th Unique ID
     %th Additional
     %th Actions
-  - identites.each do |identity|
+  - identities.each do |identity|
     %tr
       %td= identity.provider
       %td= identity.unique_id
       %td= identity.auth_hash
       %td
-        = link_to 'Unlink', user_identity_path(user, identity), :method => :delete, :confirm => 'Are you sure?'
+        = link_to 'Unlink', user_identity_path(identity), :method => :delete, :confirm => 'Are you sure?'
 

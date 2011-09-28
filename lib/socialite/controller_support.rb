@@ -3,10 +3,28 @@ module Socialite
     extend ActiveSupport::Concern
 
     included do
-      helper_method :current_user, :user_signed_in?, :current_user?
+      helper_method :current_user, :user_signed_in?, :current_user?, :default_route
     end
 
     module InstanceMethods
+
+      # Set default route for redirect
+      #
+      # @param [String] the path for default redirects
+      # @return [String] the default path for redirect
+      # (see #default_route)
+      def default_route=(route)
+        @default_route = route
+      end
+
+      # Get default route for redirect
+      #
+      # @return [String] the default path for redirect
+      # (see #default_route=)
+      def default_route
+        @default_route ||= '/'
+      end
+
       # Helper for supporting multiple flash messages per type
       #
       # @param [Symbol] the type of flash message. Common types are
@@ -35,7 +53,7 @@ module Socialite
       # @return [Boolean]
       # (see #current_user?)
       def ensure_no_user
-         !current_user? || redirect_back_or_default(Socialite.root_path)
+         !current_user? || redirect_back_or_default
       end
 
       # Utils
@@ -64,7 +82,8 @@ module Socialite
       #
       # @param [String] path to use as the default redirect location
       # @return [Hash] the modified session hash
-      def redirect_back_or_default(default)
+      def redirect_back_or_default(default=nil)
+        default = self.default_route
         redirect_to(session[:return_to] || default)
         session[:return_to] = nil
       end

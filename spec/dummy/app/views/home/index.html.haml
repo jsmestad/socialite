@@ -2,6 +2,11 @@
 
 %a{:href => '/restricted'} Go to Restricted Page
 
-= link_to 'Login', login_path
+#authentication
 - if user_signed_in?
-  = link_to 'Logout', logout_path
+  = link_to 'Sign out', socialite.logout_path
+- else
+  = link_to 'Sign in', socialite.login_path
+
+#user
+  = link_to 'User Profile', socialite.user_path

@@ -21,7 +21,7 @@ module Socialite
         flash_message :error, 'We had trouble signing you out.'
       end
       respond_with(@user) do |format|
-        format.html { redirect_to Socialite.root_path }
+        format.html { redirect_to default_route }
       end
     end
   end

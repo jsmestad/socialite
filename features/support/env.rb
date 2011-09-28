@@ -51,4 +51,8 @@ end
 #   Before('~@no-txn', '~@selenium', '~@culerity', '~@celerity', '~@javascript') do
 #     DatabaseCleaner.strategy = :transaction
 #   end
-#
+
+
+# Run any available migration
+ActiveRecord::Migrator.migrate File.expand_path('../../../spec/dummy/db/migrate/', __FILE__)
+

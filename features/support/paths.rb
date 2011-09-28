@@ -31,3 +31,4 @@ module NavigationHelpers
 end
 
 World(NavigationHelpers)
+World(Rails.application.routes.url_helpers)

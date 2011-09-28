@@ -1,5 +1,6 @@
-require 'socialite/controller_support'
-require 'socialite/engine'
+require 'haml'
+require 'omniauth/core'
+require 'omniauth/oauth'
 
 module Socialite
   autoload :BaseIdentity, 'socialite/base_identity'
@@ -10,7 +11,7 @@ module Socialite
     autoload :Twitter, 'socialite/api_wrappers/twitter'
   end
 
-  mattr_accessor :service_configs
+  mattr_accessor :service_configs, :root_path, :mount_prefix
   @@service_configs = {}
 
   def self.generate_token
@@ -19,12 +20,6 @@ module Socialite
 
   def self.setup(entity = nil, &block)
     block.call self if block_given?
-  end
-
-  def self.root_path(*args, &block)
-    @root_path = Proc.new { Rails.application.routes.named_routes[:root].path }
-    @root_path = block if block_given?
-    @root_path.call(self)
   end
 
   # config.twitter APP_KEY, APP_SECRET, :scope => ['foo', 'bar']
@@ -37,3 +32,6 @@ module Socialite
     @@service_configs[:facebook] = ServiceConfig.new(app_key, app_secret, options)
   end
 end
+
+require 'socialite/controller_support'
+require 'socialite/engine'
