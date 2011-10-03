@@ -4,7 +4,7 @@ Socialite::Engine.routes.draw do
   match '/auth/failure'           => 'identities#failure'
   match '/logout'                 => 'session#destroy',  :as => :logout
 
-  resource :user, :controller => 'user', :except => [:new, :create] do
+  resource :user, :except => [:new, :create] do
     resources :identities
   end
 end

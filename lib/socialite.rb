@@ -28,7 +28,7 @@ module Socialite
     autoload :FacebookIdentity, 'socialite/models/facebook_identity.rb'
   end
 
-  mattr_accessor :service_configs, :root_path, :mount_prefix
+  mattr_accessor :service_configs, :root_path, :mount_prefix, :mounted_engine
   @@service_configs = {}
 
   def self.generate_token
@@ -37,6 +37,10 @@ module Socialite
 
   def self.setup(entity = nil, &block)
     block.call self if block_given?
+  end
+
+  def self.mounted_engine?
+    !!mounted_engine
   end
 
   # config.twitter APP_KEY, APP_SECRET, :scope => ['foo', 'bar']

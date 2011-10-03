@@ -1,5 +1,5 @@
 module Socialite
-  class UserController < ApplicationController
+  class UsersController < ApplicationController
     unloadable
 
     before_filter :ensure_user

@@ -8,16 +8,29 @@ module Socialite
 
     initializer 'socialite.load_middleware', :after => :load_config_initializers do
       if Socialite.service_configs[:twitter]
-        middleware.use OmniAuth::Strategies::Twitter,
-          Socialite.service_configs[:twitter].app_key,
-          Socialite.service_configs[:twitter].app_secret
+        if Socialite.mounted_engine?
+          middleware.use OmniAuth::Strategies::Twitter,
+            Socialite.service_configs[:twitter].app_key,
+            Socialite.service_configs[:twitter].app_secret
+        else
+          config.app_middleware.use OmniAuth::Strategies::Twitter,
+            Socialite.service_configs[:twitter].app_key,
+            Socialite.service_configs[:twitter].app_secret
+        end
       end
 
       if Socialite.service_configs[:facebook]
-        middleware.use OmniAuth::Strategies::Facebook,
-          Socialite.service_configs[:facebook].app_key,
-          Socialite.service_configs[:facebook].app_secret,
-          Socialite.service_configs[:facebook].options
+        if Socialite.mounted_engine?
+          middleware.use OmniAuth::Strategies::Facebook,
+            Socialite.service_configs[:facebook].app_key,
+            Socialite.service_configs[:facebook].app_secret,
+            Socialite.service_configs[:facebook].options
+        else
+          config.app_middleware.use OmniAuth::Strategies::Facebook,
+            Socialite.service_configs[:facebook].app_key,
+            Socialite.service_configs[:facebook].app_secret,
+            Socialite.service_configs[:facebook].options
+        end
       end
     end
 
