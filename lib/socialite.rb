@@ -13,9 +13,6 @@ module Socialite
 
   module Controllers
     autoload :Helpers, 'socialite/controllers/helpers'
-    autoload :Identities, 'socialite/controllers/identities'
-    autoload :Session, 'socialite/controllers/session'
-    autoload :User, 'socialite/controllers/user'
   end
 
   module Helpers
