@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    socialite (0.0.1.beta3)
+    socialite (0.0.1.beta4)
       grackle (~> 0.1.10)
       haml (~> 3.1.2)
       koala (~> 1.2.0beta4)
