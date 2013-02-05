@@ -1,6 +1,4 @@
 require 'haml'
-require 'omniauth/core'
-require 'omniauth/oauth'
 
 module Socialite
   class Engine < Rails::Engine

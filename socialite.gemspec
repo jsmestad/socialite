@@ -17,14 +17,16 @@ Gem::Specification.new do |gem|
   gem.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
   gem.require_paths = ["lib"]
 
-  gem.add_dependency 'rails',       ['>= 3.1.0', '~> 3.2.0']
-  gem.add_dependency 'sass-rails',  '~> 3.1.0'
-  gem.add_dependency 'simple_form', '~> 1.5.2'
-  gem.add_dependency 'haml',        '~> 3.1.2'
-  gem.add_dependency 'oa-core',     '~> 0.3.0.rc3'
-  gem.add_dependency 'oa-oauth',    '~> 0.3.0.rc3'
-  gem.add_dependency 'koala',       '~> 1.2.0beta4'
-  gem.add_dependency 'grackle',     '~> 0.1.10'
+  gem.add_dependency 'rails',       '~> 3.2.11'
+  gem.add_dependency 'sass-rails',  '~> 3.2.0'
+  gem.add_dependency 'simple_form'
+  gem.add_dependency 'haml'
+  gem.add_dependency 'omniauth',    '~> 1.0.0'
+  gem.add_dependency 'omniauth-identity'
+  gem.add_dependency 'omniauth-facebook'
+  gem.add_dependency 'omniauth-twitter'
+  # gem.add_dependency 'koala',       '~> 1.2.0beta4'
+  # gem.add_dependency 'grackle',     '~> 0.1.10'
 
   gem.add_development_dependency 'sqlite3'
   gem.add_development_dependency 'yard'

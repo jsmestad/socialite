@@ -2,6 +2,8 @@ require 'spec_helper'
 
 module Socialite
   describe FacebookIdentity do
+    before { pending }
+
     subject { FactoryGirl.build(:facebook_identity) }
     it_behaves_like 'facebook api'
 

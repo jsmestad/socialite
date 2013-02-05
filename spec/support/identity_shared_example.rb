@@ -26,7 +26,7 @@ module Socialite
 
       describe 'facebook' do
         # let(:fb_identity) { }
-        subject { Identity.find_or_initialize_by_oauth(auth_hash) }
+        subject { Identity.find_or_initialize_by_omniauth(auth_hash) }
 
         it { should be_a(Identity) }
         its(:persisted?) { should be_false }
@@ -35,8 +35,13 @@ module Socialite
           let(:user) { FactoryGirl.create(:linked_user) }
           let(:identity) { user.identities.first }
           let(:auth_hash) { identity.auth_hash.merge('provider' => identity.provider, 'uid' => identity.unique_id) }
-          subject { Identity.find_or_initialize_by_oauth(auth_hash) }
-          before { user.identities.count.should > 0; identity.user.should be_present }
+
+          subject { Identity.find_or_initialize_by_omniauth(auth_hash) }
+
+          before do
+            user.identities.count.should > 0
+            identity.user.should be_present
+          end
 
           its(:persisted?) { should be_true }
           its(:user) { should be_a(User) }

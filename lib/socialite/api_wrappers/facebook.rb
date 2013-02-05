@@ -4,7 +4,7 @@ module Socialite
       extend ActiveSupport::Concern
 
       included do
-        require 'koala'
+        # require 'koala'
       end
 
       module ClassMethods
@@ -18,48 +18,46 @@ module Socialite
         end
       end
 
-      module InstanceMethods
-        def account_url
-          "http://facebook.com/#{login}"
-        end
+      def account_url
+        "http://facebook.com/#{login}"
+      end
 
-        def access_token
-          raise unless super
-        end
+      def access_token
+        raise unless super
+      end
 
-        def api
-          api_connection
-        end
+      def api
+        api_connection
+      end
 
-        def checkins
-          api.get_connections(unique_id, 'checkins')
-        end
+      def checkins
+        api.get_connections(unique_id, 'checkins')
+      end
 
-        def friends
-          api.get_connections(unique_id, 'friends')
-        end
+      def friends
+        api.get_connections(unique_id, 'friends')
+      end
 
-        def login
-          raise unless super
-        end
+      def login
+        raise unless super
+      end
 
-        def picture
-          api.get_picture(unique_id)
-        end
+      def picture
+        api.get_picture(unique_id)
+      end
 
-        def info
-          api.get_object(unique_id)
-        end
+      def info
+        api.get_object(unique_id)
+      end
 
-        def unique_id
-          raise unless super
-        end
+      def unique_id
+        raise unless super
+      end
 
-      protected
+    protected
 
-        def api_connection
-          @api_connection ||= self.class.api_connection(access_token)
-        end
+      def api_connection
+        @api_connection ||= self.class.api_connection(access_token)
       end
     end
   end

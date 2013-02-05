@@ -38,61 +38,59 @@ module Socialite
         #
         # @params [Hash] the OAuth authentication hash
         # @returns [Identity]
-        def find_or_initialize_by_oauth(auth_hash)
-          identity = where(:provider => auth_hash['provider'], :unique_id => auth_hash['uid']).first || new
-          identity.auth_hash = auth_hash
+        def find_or_initialize_by_omniauth(auth)
+          identity = where(:provider => auth['provider'], :unique_id => auth['uid']).first || new
+          identity.auth_hash = auth
           identity
         end
       end
 
-      module InstanceMethods
-        # Method that maps uid to unique_id which is what we store it as.
-        #
-        # @returns [String]
-        # def uid=(new_uid)
-        #   self.unique_id = new_uid
-        # end
+      # Method that maps uid to unique_id which is what we store it as.
+      #
+      # @returns [String]
+      # def uid=(new_uid)
+      #   self.unique_id = new_uid
+      # end
 
-        # Convenience method for accessing the OAuth access token
-        #
-        # @returns [String] OAuth access token
-        # (see #credentials)
-        def access_token
-          credentials['token']
-        end
+      # Convenience method for accessing the OAuth access token
+      #
+      # @returns [String] OAuth access token
+      # (see #credentials)
+      def access_token
+        credentials['token']
+      end
 
-        # Convenience method for accessing the OAuth access token secret
-        #
-        # @returns [String] OAuth access token secret
-        # (see #credentials)
-        def access_token_secret
-          credentials['secret']
-        end
+      # Convenience method for accessing the OAuth access token secret
+      #
+      # @returns [String] OAuth access token secret
+      # (see #credentials)
+      def access_token_secret
+        credentials['secret']
+      end
 
-        # Convenience method for accessing the OAuth credentials sub-hash
-        #
-        # @returns [Hash] OAuth credentials sub-hash
-        # (see #access_token)
-        # (see #access_token_secret)
-        def credentials
-          auth_hash['credentials']
-        end
+      # Convenience method for accessing the OAuth credentials sub-hash
+      #
+      # @returns [Hash] OAuth credentials sub-hash
+      # (see #access_token)
+      # (see #access_token_secret)
+      def credentials
+        auth_hash['credentials']
+      end
 
-        # Convenience method for accessing the nickname, which is typically
-        # set to the login name used for that provider.
-        #
-        # @returns [String] user nickname for the provider identity
-        def nickname
-          user_info['nickname']
-        end
+      # Convenience method for accessing the nickname, which is typically
+      # set to the login name used for that provider.
+      #
+      # @returns [String] user nickname for the provider identity
+      def nickname
+        info['nickname']
+      end
 
-        # Convenience method for accessing the user information from the
-        # OAuth provider.
-        #
-        # @returns [Hash] the user information sub-hash
-        def user_info
-          auth_hash['user_info']
-        end
+      # Convenience method for accessing the user information from the
+      # OAuth provider.
+      #
+      # @returns [Hash] the user information sub-hash
+      def info
+        auth_hash['info']
       end
     end
   end

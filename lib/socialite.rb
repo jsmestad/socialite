@@ -1,6 +1,8 @@
 require 'haml'
-require 'omniauth/core'
-require 'omniauth/oauth'
+require 'omniauth'
+require 'omniauth-facebook'
+require 'omniauth-twitter'
+require 'omniauth-identity'
 
 module Socialite
   autoload :ControllerSupport, 'socialite/controller_support'
