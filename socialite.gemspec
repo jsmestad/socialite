@@ -17,7 +17,7 @@ Gem::Specification.new do |gem|
   gem.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
   gem.require_paths = ["lib"]
 
-  gem.add_dependency 'rails',       '~> 3.1.0'
+  gem.add_dependency 'rails',       ['>= 3.1.0', '~> 3.2.0']
   gem.add_dependency 'sass-rails',  '~> 3.1.0'
   gem.add_dependency 'simple_form', '~> 1.5.2'
   gem.add_dependency 'haml',        '~> 3.1.2'
