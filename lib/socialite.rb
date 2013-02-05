@@ -51,6 +51,10 @@ module Socialite
   def self.facebook(app_key, app_secret, options = {})
     @@service_configs[:facebook] = ServiceConfig.new(app_key, app_secret, options)
   end
+
+  def self.identity(enabled)
+    @@service_configs[:identity] = ServiceConfig.new('','',{})
+  end
 end
 
 require 'socialite/engine'
