@@ -2,7 +2,7 @@ module Socialite
   module Helpers
     module Authentication
       def identity_request_path(options={})
-        [Socialite.mount_prefix, 'auth', options[:service]].join('/')
+        ['/auth', options[:service]].join('/')
       end
 
       def twitter_login_button

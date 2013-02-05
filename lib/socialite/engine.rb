@@ -1,10 +1,22 @@
 require 'haml'
+require 'omniauth'
+require 'omniauth-facebook'
+require 'omniauth-twitter'
+require 'omniauth-identity'
 
 module Socialite
   class Engine < Rails::Engine
     isolate_namespace Socialite
 
     initializer 'socialite.load_middleware', :after => :load_config_initializers do
+      if Socialite.service_configs[:identity]
+        if Socialite.mounted_engine?
+          middleware.use OmniAuth::Strategies::Identity
+        else
+          config.app_middleware.use OmniAuth::Strategies::Identity
+        end
+      end
+
       if Socialite.service_configs[:twitter]
         if Socialite.mounted_engine?
           middleware.use OmniAuth::Strategies::Twitter,
