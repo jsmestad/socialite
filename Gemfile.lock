@@ -3,7 +3,7 @@ PATH
   specs:
     socialite (0.1.0)
       haml
-      omniauth (~> 1.0.0)
+      omniauth (~> 1.1.0)
       omniauth-facebook
       omniauth-identity
       omniauth-twitter
@@ -105,7 +105,7 @@ GEM
       jwt (~> 0.1.4)
       multi_json (~> 1.0)
       rack (~> 1.2)
-    omniauth (1.0.3)
+    omniauth (1.1.1)
       hashie (~> 1.2)
       rack
     omniauth-facebook (1.4.1)

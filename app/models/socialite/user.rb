@@ -1,5 +1,6 @@
 module Socialite
   class User < ActiveRecord::Base
+    self.abstract_class = true
     include Models::User
 
     has_one :facebook_identity,

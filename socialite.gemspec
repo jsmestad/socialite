@@ -21,7 +21,7 @@ Gem::Specification.new do |gem|
   gem.add_dependency 'sass-rails',  '~> 3.2.0'
   gem.add_dependency 'simple_form'
   gem.add_dependency 'haml'
-  gem.add_dependency 'omniauth',    '~> 1.0.0'
+  gem.add_dependency 'omniauth',    '~> 1.1.0'
   gem.add_dependency 'omniauth-identity'
   gem.add_dependency 'omniauth-facebook'
   gem.add_dependency 'omniauth-twitter'
