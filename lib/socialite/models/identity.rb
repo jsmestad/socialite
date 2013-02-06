@@ -4,8 +4,8 @@ module Socialite
       extend ActiveSupport::Concern
 
       included do
-        belongs_to :api, :polymorphic => true, :dependent => :destroy
-        belongs_to :user
+        belongs_to :user,
+          :class_name => Socialite.user_class
         serialize :auth_hash
 
         # Ensure that before validation happens that the provider

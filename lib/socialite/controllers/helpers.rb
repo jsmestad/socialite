@@ -21,7 +21,7 @@ module Socialite
       # @return [String] the default path for redirect
       # (see #default_route=)
       def default_route
-        @default_route ||= '/'
+        @default_route ||= main_app.root_url
       end
 
       # Helper for supporting multiple flash messages per type
@@ -55,7 +55,7 @@ module Socialite
         !current_user? || redirect_back_or_default
       end
 
-      # Utils
+      ## Utilities
 
       # Store the location URL in the session for later use.
       #
@@ -93,9 +93,9 @@ module Socialite
       # (see #current_user=)
       def current_user
         @current_user ||= if session[:user_id]
-                            ::User.find(session[:user_id])
+                            Socialite.user_class.find(session[:user_id])
                           elsif cookies[:remember_token]
-                            ::User.find_by_remember_token(cookies[:remember_token])
+                            Socialite.user_class.find_by_remember_token(cookies[:remember_token])
                           end
       end
 
@@ -125,8 +125,7 @@ module Socialite
       #
       # @return [Hash] the modified session object
       def logout!
-        session[:user_id] = nil
-        session[:return_to] = nil
+        session[:user_id] = session[:return_to] = nil
         @current_user = nil
         cookies.delete(:remember_token)
       end
