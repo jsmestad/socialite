@@ -1,14 +1,31 @@
-#socialite_login
-  .information
-    %h1 Sign in (or up)
-    %p.large
-      You can use either your Twitter or Facebook account to sign in or sign up.
-    %p
-      Select your preferred method and you'll be sent off to authorise us to use your account.
-    %p
-      It’ll only take a second and your information will be perfectly safe. We don't get access to your password and
-      %em we won't post or tweet anything from your account
-      without your explicit permission.
+%h1 Sign In
 
-  = twitter_login_button
-  = facebook_login_button
+%p
+  %strong Sign in through one of these services:
+
+.auth_providers
+  %a.auth_provider{href: "/auth/twitter"}
+    #{image_tag "twitter_64.png", size: "64x64", alt: "Twitter"}
+    Twitter
+  %a.auth_provider{href: "/auth/facebook"}
+    #{image_tag "facebook_64.png", size: "64x64", alt: "Facebook"}
+    Facebook
+  %a.auth_provider{href: "/auth/google_apps"}
+    #{image_tag "google_apps_64.png", size: "64x64", alt: "Google"}
+    Google
+
+%p
+  %strong Don't use these services?
+  #{link_to "Create an account", new_identity_path} or login below.
+
+= form_tag "/auth/identity/callback" do
+  .field
+    = label_tag :auth_key, "Email"
+    %br
+    = text_field_tag :auth_key
+  .field
+    = label_tag :password
+    %br
+    = password_field_tag :password
+  .actions
+    = submit_tag "Login"

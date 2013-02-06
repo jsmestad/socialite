@@ -1,17 +1,10 @@
+require 'socialite/engine'
+
 require 'haml'
 require 'omniauth'
-require 'omniauth-facebook'
-require 'omniauth-twitter'
-require 'omniauth-identity'
 
 module Socialite
   autoload :ControllerSupport, 'socialite/controller_support'
-  autoload :ServiceConfig, 'socialite/service_config'
-
-  module ApiWrappers
-    autoload :Facebook, 'socialite/api_wrappers/facebook'
-    autoload :Twitter, 'socialite/api_wrappers/twitter'
-  end
 
   module Controllers
     autoload :Helpers, 'socialite/controllers/helpers'
@@ -22,39 +15,38 @@ module Socialite
   end
 
   module Models
-    autoload :Identity, 'socialite/models/identity'
-    autoload :User, 'socialite/models/user'
-    autoload :FacebookIdentity, 'socialite/models/facebook_identity.rb'
+    autoload :IdentityConcern, 'socialite/models/identity_concern'
+    autoload :UserConcern, 'socialite/models/user_concern'
   end
 
-  mattr_accessor :service_configs, :root_path, :mount_prefix, :mounted_engine
-  @@service_configs = {}
-
-  def self.generate_token
-    SecureRandom.base64(15).tr('+/=lIO0', 'pqrsxyz')
+  def self.setup
+    yield self if block_given?
   end
 
-  def self.setup(entity = nil, &block)
-    block.call self if block_given?
+  mattr_accessor :user_class, :identity_class, :providers
+
+  def self.providers
+    @@providers ||= []
   end
 
-  def self.mounted_engine?
-    !!mounted_engine
+  def self.provider(klass, *args)
+    @@providers ||= []
+    @@providers << [klass, args]
   end
 
-  # config.twitter APP_KEY, APP_SECRET, :scope => ['foo', 'bar']
-  def self.twitter(app_key, app_secret, options = {})
-    @@service_configs[:twitter] = ServiceConfig.new(app_key, app_secret, options)
+  def self.identity_class
+    identity_class_name.constantize
   end
 
-  # config.facebook APP_KEY, APP_SECRET, :scope => ['foo', 'bar']
-  def self.facebook(app_key, app_secret, options = {})
-    @@service_configs[:facebook] = ServiceConfig.new(app_key, app_secret, options)
+  def self.identity_class_name
+    @@identity_class.camelize
   end
 
-  def self.identity(enabled)
-    @@service_configs[:identity] = ServiceConfig.new('','',{})
+  def self.user_class
+    user_class_name.constantize
+  end
+
+  def self.user_class_name
+    @@user_class.camelize
   end
 end
-
-require 'socialite/engine'
