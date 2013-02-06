@@ -21,12 +21,12 @@ module Socialite
       end
     end
 
-    ActiveSupport.on_load(:action_controller) do
-      include Socialite::Controllers::Helpers
-    end
+    # ActiveSupport.on_load(:action_controller) do
+      # include Socialite::Controllers::Helpers
+    # end
 
-    ActiveSupport.on_load(:action_view) do
-      include Socialite::Helpers::Authentication
-    end
+    # ActiveSupport.on_load(:action_view) do
+      # include Socialite::Helpers::Authentication
+    # end
   end
 end

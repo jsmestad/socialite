@@ -19,15 +19,11 @@ module Socialite
     autoload :UserConcern, 'socialite/models/user_concern'
   end
 
+  def self.setup
+    yield self if block_given?
+  end
+
   mattr_accessor :user_class, :identity_class, :providers
-
-  def self.user_class
-    user_class_name.constantize
-  end
-
-  def self.user_class_name
-    @@user_class.camelize
-  end
 
   def self.providers
     @@providers ||= []
@@ -46,8 +42,11 @@ module Socialite
     @@identity_class.camelize
   end
 
-  def self.setup
-    yield self if block_given?
+  def self.user_class
+    user_class_name.constantize
+  end
+
+  def self.user_class_name
+    @@user_class.camelize
   end
 end
-

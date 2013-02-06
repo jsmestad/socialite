@@ -92,8 +92,8 @@ module Socialite
       # @return [User]
       # (see #current_user=)
       def current_user
-        @current_user ||= if session[:user_id]
-                            Socialite.user_class.find(session[:user_id])
+        @current_user ||= if session[:socialite_user_id]
+                            Socialite.user_class.find(session[:socialite_user_id])
                           elsif cookies[:remember_token]
                             Socialite.user_class.find_by_remember_token(cookies[:remember_token])
                           end
