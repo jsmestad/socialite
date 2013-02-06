@@ -26,6 +26,10 @@ module Socialite
     @@user_class.constantize
   end
 
+  def self.user_class_name
+    @@user_class
+  end
+
   def self.providers
     @@providers ||= []
   end
@@ -37,6 +41,10 @@ module Socialite
 
   def self.identity_class
     @@identity_class.constantize
+  end
+
+  def self.identity_class_name
+    @@identity_class
   end
 
   def self.setup

@@ -5,8 +5,8 @@ Socialite.setup do |config|
   #
   # **NOTE** These _should_ be set to string values to prevent any possible
   # errors caused by load order.
-  config.user_class = 'Account'
-  config.identity_class = 'Provider'
+  config.user_class = 'User'
+  config.identity_class = 'Identity'
 
   ## Add any supported OmniAuth providers
   # You can pass any providers that are supported by OmniAuth simply by

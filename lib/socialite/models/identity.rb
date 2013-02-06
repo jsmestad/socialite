@@ -5,7 +5,7 @@ module Socialite
 
       included do
         belongs_to :user,
-          :class_name => Socialite.user_class
+          :class_name => Socialite.user_class_name
         serialize :auth_hash
 
         # Ensure that before validation happens that the provider

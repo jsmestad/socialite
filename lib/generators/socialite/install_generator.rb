@@ -6,13 +6,8 @@ module Socialite
       source_root File.expand_path("../templates", __FILE__)
 
       desc 'Creates a socialite initializer'
-
       def copy_initializer
         template 'socialite.rb', 'config/initializers/socialite.rb'
-      end
-
-      def run_other_generators
-        generate "active_record:socialite"
       end
 
       # def add_opro_routes

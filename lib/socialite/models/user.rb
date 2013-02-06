@@ -6,7 +6,7 @@ module Socialite
       included do
         has_many :identities,
           :dependent => :destroy,
-          :class_name => Socialite.identity_class
+          :class_name => Socialite.identity_class_name
 
         # has_one :facebook_identity,
           # :class_name => 'Identity', :foreign_key => 'user_id', :conditions => { :provider => 'facebook' }

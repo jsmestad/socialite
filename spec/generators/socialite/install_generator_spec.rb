@@ -22,11 +22,10 @@ describe Socialite::Generators::InstallGenerator do
   it 'should run all tasks in the generator' do
     gen = generator %w(install)
     gen.should_receive :copy_initializer
-    gen.should_receive :run_other_generators
     capture(:stdout) { gen.invoke_all }
   end
 
-   # custom matchers make it easy to verify what the generator creates
+  # custom matchers make it easy to verify what the generator creates
   describe 'the generated files' do
     before do
       run_generator %w(install)
