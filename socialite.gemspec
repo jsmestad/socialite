@@ -18,12 +18,9 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
 
   s.add_dependency 'rails', '~> 3.2.11'
-  s.add_dependency 'jquery-rails'
-
-  s.add_dependency 'sass-rails',  '~> 3.2.0'
-  s.add_dependency 'simple_form'
+  s.add_dependency 'sass-rails'
   s.add_dependency 'haml'
-  s.add_dependency 'omniauth',    '~> 1.1.0'
+  s.add_dependency 'omniauth', '~> 1.1.0'
 
   s.add_development_dependency 'sqlite3'
   s.add_development_dependency 'yard'
