@@ -2,17 +2,9 @@ require 'socialite/engine'
 
 require 'haml'
 require 'omniauth'
-require 'omniauth-facebook'
-require 'omniauth-twitter'
-require 'omniauth-identity'
 
 module Socialite
   autoload :ControllerSupport, 'socialite/controller_support'
-
-  module ApiWrappers
-    autoload :Facebook, 'socialite/api_wrappers/facebook'
-    autoload :Twitter, 'socialite/api_wrappers/twitter'
-  end
 
   module Controllers
     autoload :Helpers, 'socialite/controllers/helpers'
