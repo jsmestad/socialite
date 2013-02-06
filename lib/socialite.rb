@@ -15,19 +15,18 @@ module Socialite
   end
 
   module Models
-    autoload :Identity, 'socialite/models/identity'
-    autoload :User, 'socialite/models/user'
-    autoload :FacebookIdentity, 'socialite/models/facebook_identity.rb'
+    autoload :IdentityConcern, 'socialite/models/identity_concern'
+    autoload :UserConcern, 'socialite/models/user_concern'
   end
 
   mattr_accessor :user_class, :identity_class, :providers
 
   def self.user_class
-    @@user_class.constantize
+    user_class_name.constantize
   end
 
   def self.user_class_name
-    @@user_class
+    @@user_class.camelize
   end
 
   def self.providers
@@ -40,11 +39,11 @@ module Socialite
   end
 
   def self.identity_class
-    @@identity_class.constantize
+    identity_class_name.constantize
   end
 
   def self.identity_class_name
-    @@identity_class
+    @@identity_class.camelize
   end
 
   def self.setup

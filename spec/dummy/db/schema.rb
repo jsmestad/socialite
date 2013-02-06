@@ -11,19 +11,20 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130206220414) do
+ActiveRecord::Schema.define(:version => 20130206224517) do
 
   create_table "socialite_identities", :force => true do |t|
     t.string   "uid"
     t.string   "provider"
-    t.integer  "socialite_users_id"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
+    t.text     "auth_hash"
+    t.integer  "socialite_user_id"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
   end
 
   add_index "socialite_identities", ["provider", "uid"], :name => "index_socialite_identities_on_provider_and_uid", :unique => true
-  add_index "socialite_identities", ["socialite_users_id", "provider"], :name => "index_socialite_identities_on_socialite_users_id_and_provider", :unique => true
-  add_index "socialite_identities", ["socialite_users_id"], :name => "index_socialite_identities_on_socialite_users_id"
+  add_index "socialite_identities", ["socialite_user_id", "provider"], :name => "index_socialite_identities_on_socialite_user_id_and_provider", :unique => true
+  add_index "socialite_identities", ["socialite_user_id"], :name => "index_socialite_identities_on_socialite_user_id"
 
   create_table "socialite_users", :force => true do |t|
     t.string   "name"

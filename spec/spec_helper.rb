@@ -32,3 +32,11 @@ RSpec.configure do |config|
   # http://stackoverflow.com/a/12978795
   config.include Capybara::DSL, type: :request
 end
+
+def identity_class
+  Socialite.identity_class
+end
+
+def user_class
+  Socialite.user_class
+end

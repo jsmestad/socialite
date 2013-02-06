@@ -1,3 +1,4 @@
-class User < Socialite::User
-
+class User < ActiveRecord::Base
+  self.table_name = 'socialite_users'
+  include Socialite::Models::UserConcern
 end

@@ -1,10 +1,10 @@
 FactoryGirl.define do
-  factory :user, :class => 'User' do
+  factory :user do
     # Something here
   end
 
-  factory :linked_user, :class => 'User', :parent => :user do
-    after_build do |user|
+  factory :linked_user, :parent => :user do
+    after(:build) do |user|
       user.identities = [
         FactoryGirl.build(:identity, :provider => 'facebook'),
         FactoryGirl.build(:identity, :provider => 'twitter')
