@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :identity, :class => Socialite::Identity do
+  factory :identity, :class => 'Identity' do
     sequence(:unique_id, 1000) { |n| "abcdef#{n}" }
     # association :user, :factory => :user, :method => :build
     provider 'facebook'

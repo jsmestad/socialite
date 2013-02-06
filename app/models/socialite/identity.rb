@@ -1,6 +1,6 @@
 module Socialite
   class Identity < ActiveRecord::Base
-    self.abstract_class = true
     include Models::Identity
+    self.abstract_class = true
   end
 end

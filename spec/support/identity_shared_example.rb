@@ -26,9 +26,9 @@ module Socialite
 
       describe 'facebook' do
         # let(:fb_identity) { }
-        subject { Identity.find_or_initialize_by_omniauth(auth_hash) }
+        subject { ::MyIdentity.find_or_initialize_by_omniauth(auth_hash) }
 
-        it { should be_a(Identity) }
+        it { should be_a(::MyIdentity) }
         its(:persisted?) { should be_false }
 
         context 'existing identity' do
@@ -36,7 +36,7 @@ module Socialite
           let(:identity) { user.identities.first }
           let(:auth_hash) { identity.auth_hash.merge('provider' => identity.provider, 'uid' => identity.unique_id) }
 
-          subject { Identity.find_or_initialize_by_omniauth(auth_hash) }
+          subject { ::MyIdentity.find_or_initialize_by_omniauth(auth_hash) }
 
           before do
             user.identities.count.should > 0
@@ -44,7 +44,7 @@ module Socialite
           end
 
           its(:persisted?) { should be_true }
-          its(:user) { should be_a(User) }
+          its(:user) { should be_a(::MyUser) }
           its(:user) { should eql(user) }
         end
       end

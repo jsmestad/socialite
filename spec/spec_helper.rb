@@ -2,8 +2,11 @@
 ENV["RAILS_ENV"] = "test"
 
 require File.expand_path('../dummy/config/environment.rb',  __FILE__)
-require 'rails/test_help'
 require 'rspec/rails'
+
+# Testing Generators
+require 'ammeter/init'
+require 'factory_girl_rails'
 
 # Should matchers
 require 'shoulda/matchers'
@@ -13,17 +16,19 @@ Rails.backtrace_cleaner.remove_silencers!
 # Load support files
 Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }
 
-# Load factories
-require 'factory_girl'
-Dir["#{File.dirname(__FILE__)}/factories/**/*.rb"].each { |f| require f }
-
-# Run any available migration
-ActiveRecord::Migrator.migrate File.expand_path('../dummy/db/migrate/', __FILE__)
+# Run migrations if present
+ActiveRecord::Migrator.migrate File.expand_path("../dummy/db/migrate/", __FILE__)
 
 RSpec.configure do |config|
-  require 'rspec/expectations'
   config.include RSpec::Matchers
-  # config.include Socialite::Identity
-
   config.use_transactional_fixtures = true
+  config.infer_base_class_for_anonymous_controllers = false
+  config.order = "random"
+
+  config.expect_with :rspec do |c|
+    c.syntax = [:should, :expect]
+  end
+
+  # http://stackoverflow.com/a/12978795
+  config.include Capybara::DSL, type: :request
 end
