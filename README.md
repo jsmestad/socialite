@@ -38,10 +38,11 @@ password recovery.
 
 To use Socialite in a Rails 3.1 application:
 
-* Require it in the Gemfile: `gem 'socialite'`
-* Install it by running `bundle`.
-* Use the provided CSS by adding `//= require socialite` from your
-  application's CSS manifest file
+* Require it in the Gemfile:
+  `gem 'socialite', git: 'git://github.com/jsmestad/socialite`
+* Install the gem it by running `bundle install`.
+* Run the socialite generator using `rails g socialite:install` for typical
+  installs and `rails g active_record:socialite` for specifying custom options.
 
 ## History
 
