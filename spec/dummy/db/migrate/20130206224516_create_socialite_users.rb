@@ -1,9 +1,7 @@
-class CreateUsers < ActiveRecord::Migration
+class CreateSocialiteUsers < ActiveRecord::Migration
   def up
     create_table :socialite_users do |t|
-      t.string :remember_token
-      # Any additional fields here
-
+      t.string :name
       t.timestamps
     end
   end

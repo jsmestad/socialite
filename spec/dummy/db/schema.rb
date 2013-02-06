@@ -11,33 +11,25 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110926005551) do
-
-  create_table "socialite_facebook_identities", :force => true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
+ActiveRecord::Schema.define(:version => 20130206224517) do
 
   create_table "socialite_identities", :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "api_id"
-    t.string   "api_type"
-    t.string   "unique_id",  :null => false
-    t.string   "provider",   :null => false
+    t.string   "uid"
+    t.string   "provider"
     t.text     "auth_hash"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.integer  "socialite_user_id"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
   end
 
-  add_index "socialite_identities", ["api_id", "api_type"], :name => "index_socialite_identities_on_api_id_and_api_type"
-  add_index "socialite_identities", ["provider", "unique_id"], :name => "index_socialite_identities_on_provider_and_unique_id", :unique => true
-  add_index "socialite_identities", ["user_id", "provider"], :name => "index_socialite_identities_on_user_id_and_provider", :unique => true
-  add_index "socialite_identities", ["user_id"], :name => "index_socialite_identities_on_user_id"
+  add_index "socialite_identities", ["provider", "uid"], :name => "index_socialite_identities_on_provider_and_uid", :unique => true
+  add_index "socialite_identities", ["socialite_user_id", "provider"], :name => "index_socialite_identities_on_socialite_user_id_and_provider", :unique => true
+  add_index "socialite_identities", ["socialite_user_id"], :name => "index_socialite_identities_on_socialite_user_id"
 
   create_table "socialite_users", :force => true do |t|
-    t.string   "remember_token"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
 end

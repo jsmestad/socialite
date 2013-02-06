@@ -2,15 +2,15 @@ module Socialite
   shared_examples 'identity' do
     it { should belong_to(:user) }
 
-    it { should have_db_column(:unique_id) }
+    it { should have_db_column(:uid) }
     it { should have_db_column(:provider) }
     it { should have_db_column(:auth_hash) }
 
-    it { should validate_presence_of(:unique_id) }
+    it { should validate_presence_of(:uid) }
     it { should validate_presence_of(:provider) }
 
-    it { should validate_uniqueness_of(:unique_id).scoped_to(:provider) }
-    it { should validate_uniqueness_of(:provider).scoped_to(:user_id).case_insensitive }
+    it { should validate_uniqueness_of(:uid).scoped_to(:provider) }
+    it { should validate_uniqueness_of(:provider).scoped_to("#{user_class.table_name.singularize}_id").case_insensitive }
 
     describe '.find_or_initialize_by_oauth' do
       let(:auth_hash) do
@@ -25,18 +25,17 @@ module Socialite
       end
 
       describe 'facebook' do
-        # let(:fb_identity) { }
-        subject { Identity.find_or_initialize_by_omniauth(auth_hash) }
+        subject { identity_class.find_or_initialize_by_omniauth(auth_hash) }
 
-        it { should be_a(Identity) }
+        it { should be_a(identity_class) }
         its(:persisted?) { should be_false }
 
         context 'existing identity' do
           let(:user) { FactoryGirl.create(:linked_user) }
           let(:identity) { user.identities.first }
-          let(:auth_hash) { identity.auth_hash.merge('provider' => identity.provider, 'uid' => identity.unique_id) }
+          let(:auth_hash) { identity.auth_hash.merge('provider' => identity.provider, 'uid' => identity.uid) }
 
-          subject { Identity.find_or_initialize_by_omniauth(auth_hash) }
+          subject { identity_class.find_or_initialize_by_omniauth(auth_hash) }
 
           before do
             user.identities.count.should > 0
@@ -44,7 +43,7 @@ module Socialite
           end
 
           its(:persisted?) { should be_true }
-          its(:user) { should be_a(User) }
+          its(:user) { should be_a(user_class) }
           its(:user) { should eql(user) }
         end
       end
@@ -60,13 +59,13 @@ module Socialite
     end
   end
 
-  shared_examples 'facebook api' do
-    it { should respond_to(:account_url) }
-    it { should respond_to(:api) }
-    it { should respond_to(:api_connection) }
-    it { should respond_to(:checkins) }
-    it { should respond_to(:friends) }
-    it { should respond_to(:picture) }
-    it { should respond_to(:info) }
-  end
+  # shared_examples 'facebook api' do
+    # it { should respond_to(:account_url) }
+    # it { should respond_to(:api) }
+    # it { should respond_to(:api_connection) }
+    # it { should respond_to(:checkins) }
+    # it { should respond_to(:friends) }
+    # it { should respond_to(:picture) }
+    # it { should respond_to(:info) }
+  # end
 end

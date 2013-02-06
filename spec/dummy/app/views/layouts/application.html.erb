@@ -2,15 +2,11 @@
 <html>
 <head>
   <title>Dummy</title>
-  <%= stylesheet_link_tag    "application" %>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-
-<% flash.keys.each do |type| %>
-  <div class="flash <%= type.to_s %>"><%=h flash[type].join('<br/>') %></div>
-<% end %>
 
 <%= yield %>
 

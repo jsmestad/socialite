@@ -1,11 +1,12 @@
 module Socialite
   module Models
-    module Identity
+    module IdentityConcern
       extend ActiveSupport::Concern
 
       included do
-        belongs_to :api, :polymorphic => true, :dependent => :destroy
-        belongs_to :user
+        belongs_to :user,
+          :class_name => Socialite.user_class_name,
+          :foreign_key => "#{Socialite.user_class.table_name.singularize}_id"
         serialize :auth_hash
 
         # Ensure that before validation happens that the provider
@@ -14,17 +15,17 @@ module Socialite
         before_validation do |identity|
           if identity.auth_hash.present?
             identity.provider = identity.auth_hash.delete('provider') if identity.provider.blank?
-            identity.unique_id = identity.auth_hash.delete('uid') if identity.unique_id.blank?
+            identity.uid = identity.auth_hash.delete('uid') if identity.uid.blank?
           end
         end
 
         # Ensure each user has only a single identity per provider type
         validates :provider,
-          :uniqueness => {:scope => :user_id, :case_sensitive => false},
+          :uniqueness => {:scope => "#{Socialite.user_class.table_name.singularize}_id", :case_sensitive => false},
           :presence => true
 
         # Ensure an identity is never reused by another account
-        validates :unique_id,
+        validates :uid,
           :uniqueness => {:scope => :provider},
           :presence => true
 
@@ -39,18 +40,11 @@ module Socialite
         # @params [Hash] the OAuth authentication hash
         # @returns [Identity]
         def find_or_initialize_by_omniauth(auth)
-          identity = where(:provider => auth['provider'], :unique_id => auth['uid']).first || new
+          identity = where(:provider => auth['provider'], :uid => auth['uid']).first || new
           identity.auth_hash = auth
           identity
         end
       end
-
-      # Method that maps uid to unique_id which is what we store it as.
-      #
-      # @returns [String]
-      # def uid=(new_uid)
-      #   self.unique_id = new_uid
-      # end
 
       # Convenience method for accessing the OAuth access token
       #

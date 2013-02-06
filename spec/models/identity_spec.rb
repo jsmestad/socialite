@@ -1,9 +1,9 @@
 require 'spec_helper'
 
-module Socialite
+# module Socialite
   describe Identity do
     let!(:identity) { FactoryGirl.create(:identity) }
 
     it_behaves_like 'identity'
   end
-end
+# end

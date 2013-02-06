@@ -5,20 +5,8 @@ module Socialite
     before_filter :ensure_user, :only => [:destroy]
     respond_to :html, :json
 
-    def create
-      auth_hash = request.env['omniauth.auth']
-      identity = Identity.find_or_initialize_by_oauth(auth_hash)
-      identity.build_user if identity.user.blank?
-
-      if identity.save
-        self.current_user ||= identity.user
-        flash_message :notice, 'You have logged in successfully.'
-      else
-        flash_message :error, 'An error occurred. Please try again.'
-      end
-      respond_with(identity) do |format|
-        format.html { redirect_back_or_default }
-      end
+    def new
+      @identity = env['omniauth.identity'] ||= User.new
     end
 
     def failure

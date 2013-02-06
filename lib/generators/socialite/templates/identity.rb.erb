@@ -1,0 +1,25 @@
+class CreateSocialiteIdentities < ActiveRecord::Migration
+  def up
+    create_table :<%= options[:identity_table] %> do |t|
+      t.string :uid, :provider
+      t.text :auth_hash
+      t.integer :<%= "#{options[:users_table].singularize}_id" %>
+      t.timestamps
+    end
+
+    add_index :<%= options[:identity_table] %>,
+      :<%= "#{options[:users_table].singularize}_id" %>
+
+    # Restrict each user to one identity per provider, to disable comment out.
+    add_index :<%= options[:identity_table] %>,
+      [:<%= "#{options[:users_table].singularize}_id" %>, :provider], :unique => true
+
+    # Database constraint to ensure uniqueness of UIDs (scoped to provider)
+    add_index :<%= options[:identity_table] %>,
+      [:provider, :uid], :unique => true
+  end
+
+  def down
+    drop_table :<%= options[:identity_table] %>
+  end
+end
