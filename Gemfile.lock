@@ -5,9 +5,6 @@ PATH
       haml
       jquery-rails
       omniauth (~> 1.1.0)
-      omniauth-facebook
-      omniauth-identity
-      omniauth-twitter
       rails (~> 3.2.11)
       sass-rails (~> 3.2.0)
       simple_form
@@ -204,6 +201,9 @@ DEPENDENCIES
   factory_girl_rails
   jquery-rails
   mysql2
+  omniauth-facebook
+  omniauth-identity
+  omniauth-twitter
   pg (~> 0.14)
   rspec-rails
   shoulda-matchers

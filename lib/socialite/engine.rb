@@ -1,8 +1,5 @@
 require 'haml'
 require 'omniauth'
-require 'omniauth-facebook'
-require 'omniauth-twitter'
-require 'omniauth-identity'
 
 module Socialite
   class Engine < ::Rails::Engine
