@@ -1,6 +1,5 @@
 require 'rails/generators/migration'
 
-
 module ActiveRecord
   module Generators
     class SocialiteGenerator < ::Rails::Generators::Base
