@@ -8,7 +8,7 @@ support for managing multiple OAuth providers per User.
 Every site I have built in the past couple years has required implementing
 authentication support for Users. Now this was simple enough when it was only
 **one** provider (in my case, "Login with Facebook"), but more often then not
-it evolved into "Login with <insert\_social\_site>".
+it evolved into "Login with `<insert_oauth_provider>`".
 
 Now OmniAuth has some [good write-ups](https://github.com/intridea/omniauth/wiki/Managing-Multiple-Providers)
 on handling multiple providers, but it lacked any support for restricting a user
