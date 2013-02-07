@@ -32,6 +32,7 @@ RSpec.configure do |config|
 
   # http://stackoverflow.com/a/12978795
   config.include Capybara::DSL, type: :request
+  config.include Socialite::Engine.routes.url_helpers
 end
 
 def identity_class
