@@ -4,6 +4,9 @@ before_script:
 rvm:
   - 1.9.2
   - 1.9.3
+script:
+  - rake db:migrate --quiet
+  - rspec spec
 env:
   - DB=sqlite
   - DB=mysql
