@@ -4,6 +4,8 @@ module Socialite
       extend ActiveSupport::Concern
 
       included do
+        has_secure_password if defined?(BCrypt)
+
         has_many :identities,
           :dependent => :destroy,
           :class_name => Socialite.identity_class_name,

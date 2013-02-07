@@ -193,6 +193,7 @@ PLATFORMS
 
 DEPENDENCIES
   ammeter
+  bcrypt-ruby (>= 3.0.0)
   capybara
   database_cleaner
   factory_girl_rails

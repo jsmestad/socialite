@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :user do
-    # Something here
+    password 'secret'
   end
 
   factory :linked_user, :parent => :user do

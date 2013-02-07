@@ -5,8 +5,12 @@ require 'spec_helper'
     let(:linked_user) { FactoryGirl.create(:linked_user) }
 
     it { should have_many(:identities).dependent(:destroy) }
-    # it { should have_one(:facebook_identity) }
-    # it { should have_one(:twitter_identity) }
+
+    it { should have_db_column(:name).of_type(:string) }
+    it { should have_db_column(:email).of_type(:string) }
+    it { should have_db_column(:password_digest).of_type(:string) }
+
+    it { should have_db_index(:email).unique(true) }
 
     context 'with associated identities' do
       subject { linked_user }
