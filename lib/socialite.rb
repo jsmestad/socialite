@@ -31,22 +31,26 @@ module Socialite
 
   def self.provider(klass, *args)
     @@providers ||= []
+    case klass.to_sym
+    when :identity
+      args.reverse_merge!({:model => Socialite.user_class})
+    end
     @@providers << [klass, args]
   end
 
   def self.identity_class
-    identity_class_name.constantize
+    identity_class_name.try(:constantize)
   end
 
   def self.identity_class_name
-    @@identity_class.camelize
+    @@identity_class.try(:camelize) || 'Identity'
   end
 
   def self.user_class
-    user_class_name.constantize
+    user_class_name.try(:constantize)
   end
 
   def self.user_class_name
-    @@user_class.camelize
+    @@user_class.try(:camelize) || 'User'
   end
 end

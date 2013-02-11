@@ -1,5 +1,8 @@
 require 'spec_helper'
 
+class Account; end
+class Authentication; end
+
 class User; end
 class Identity; end
 
@@ -12,15 +15,30 @@ describe Socialite do
     end
 
     describe 'configuring classes' do
-      before do
-        Socialite.setup do |c|
-          c.user_class = 'User'
-          c.identity_class = 'Identity'
+
+      describe 'the default values' do
+        before do
+          Socialite.setup do |c|
+            c.user_class = nil
+            c.identity_class = nil
+          end
         end
+
+        its(:user_class) { should eql(User) }
+        its(:identity_class) { should eql(Identity) }
       end
 
-      its(:user_class) { should eql(User) }
-      its(:identity_class) { should eql(Identity) }
+      describe 'accessors that manipulate default values' do
+        before do
+          Socialite.setup do |c|
+            c.user_class = 'Account'
+            c.identity_class = 'Authentication'
+          end
+        end
+
+        its(:user_class) { should eql(Account) }
+        its(:identity_class) { should eql(Authentication) }
+      end
     end
 
     describe 'accepting provider information' do
@@ -47,7 +65,6 @@ describe Socialite do
           subject.last[1].should == ['abc', '789']
         end
       end
-
     end
   end
 end
