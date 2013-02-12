@@ -1,0 +1,30 @@
+%h1 Sign In
+
+%p
+  %strong Sign in through one of these services:
+
+.auth_providers
+  - if defined?(OmniAuth::Strategies::Twitter)
+    %a.auth_provider{:href => "/auth/twitter"}
+      = image_tag "twitter_64.png", :size => "64x64", :alt => "Twitter"
+      Twitter
+  - if defined?(OmniAuth::Strategies::Facebook)
+    %a.auth_provider{:href => "/auth/facebook"}
+      = image_tag "facebook_64.png", :size => "64x64", :alt => "Facebook"
+      Facebook
+
+%p
+  %strong Don't use these services?
+  #{link_to "Create an account", signup_path} or login below.
+
+= form_tag "/auth/identity/callback" do
+  .field
+    = label_tag :auth_key, "Email"
+    %br
+    = text_field_tag :auth_key
+  .field
+    = label_tag :password
+    %br
+    = password_field_tag :password
+  .actions
+    = submit_tag "Sign in"

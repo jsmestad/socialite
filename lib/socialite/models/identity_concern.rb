@@ -4,6 +4,8 @@ module Socialite
       extend ActiveSupport::Concern
 
       included do
+        attr_accessible :provider, :uid, :user_id, :auth_hash
+
         belongs_to :user,
           :class_name => Socialite.user_class_name,
           :foreign_key => "#{Socialite.user_class.table_name.singularize}_id"
@@ -21,7 +23,10 @@ module Socialite
 
         # Ensure each user has only a single identity per provider type
         validates :provider,
-          :uniqueness => {:scope => "#{Socialite.user_class.table_name.singularize}_id", :case_sensitive => false},
+          :uniqueness => {
+            :scope => "#{Socialite.user_class.table_name.singularize}_id",
+            :case_sensitive => false
+          },
           :presence => true
 
         # Ensure an identity is never reused by another account
@@ -39,10 +44,24 @@ module Socialite
         #
         # @params [Hash] the OAuth authentication hash
         # @returns [Identity]
-        def find_or_initialize_by_omniauth(auth)
-          identity = where(:provider => auth['provider'], :uid => auth['uid']).first || new
-          identity.auth_hash = auth
-          identity
+        def create_from_omniauth(auth={})
+          create do |identity|
+            identity.provider = auth['provider']
+            identity.uid = auth['uid']
+            identity.auth_hash = auth
+          end
+        end
+
+        def find_or_create_from_omniauth(auth)
+          raise ArgumentError, 'auth parameter must be a hash' unless auth.is_a?(Hash)
+          find_from_omniauth(auth) || create_from_omniauth(auth)
+        end
+
+        # Finder method that finds the matching Provider and UID.
+        #
+        # @params [Hash] the OmniAuth authentication hash
+        def find_from_omniauth(auth={})
+          where(:provider => auth['provider'], :uid => auth['uid']).first
         end
       end
 

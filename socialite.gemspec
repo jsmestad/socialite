@@ -17,24 +17,28 @@ Gem::Specification.new do |s|
   s.test_files  = `git ls-files -- {test,spec,features}/*`.split("\n")
   s.require_paths = ["lib"]
 
-  s.add_dependency 'rails', '~> 3.2.11'
-  s.add_dependency 'jquery-rails'
-
-  s.add_dependency 'sass-rails',  '~> 3.2.0'
-  s.add_dependency 'simple_form'
+  s.add_dependency 'rails', '~> 3.2.12'
+  s.add_dependency 'sass-rails'
   s.add_dependency 'haml'
-  s.add_dependency 'omniauth',    '~> 1.1.0'
+  s.add_dependency 'omniauth', '~> 1.1.0'
 
+  # Optional Gem Dependencies
+  s.add_development_dependency 'bcrypt-ruby', '>= 3.0.0'
+  s.add_development_dependency 'simple_form'
+
+  # Various OmniAuth gems we test against
+  s.add_development_dependency 'omniauth-identity'
+  s.add_development_dependency 'omniauth-facebook'
+  s.add_development_dependency 'omniauth-twitter'
+
+  # Test Dependencies
   s.add_development_dependency 'sqlite3'
   s.add_development_dependency 'yard'
   s.add_development_dependency 'rspec-rails'
   s.add_development_dependency 'factory_girl_rails'
+  s.add_development_dependency 'ffaker'
   s.add_development_dependency 'shoulda-matchers'
-  s.add_development_dependency 'capybara'
+  s.add_development_dependency 'capybara', '>= 2.0.2'
+  s.add_development_dependency 'database_cleaner'
   s.add_development_dependency 'ammeter'
-
-  # OmniAuth gems we test against
-  s.add_development_dependency 'omniauth-identity'
-  s.add_development_dependency 'omniauth-facebook'
-  s.add_development_dependency 'omniauth-twitter'
 end

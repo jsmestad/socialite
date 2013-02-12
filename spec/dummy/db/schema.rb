@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130206224517) do
+ActiveRecord::Schema.define(:version => 20130207223010) do
 
   create_table "socialite_identities", :force => true do |t|
     t.string   "uid"
@@ -28,8 +28,12 @@ ActiveRecord::Schema.define(:version => 20130206224517) do
 
   create_table "socialite_users", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.string   "email"
+    t.string   "password_digest"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
   end
+
+  add_index "socialite_users", ["email"], :name => "index_socialite_users_on_email", :unique => true
 
 end
