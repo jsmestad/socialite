@@ -25,9 +25,9 @@ Socialite.setup do |config|
   # 'password recovery' entry point for all users.
   #
   # config.provider :identity,
-  #   :model => Socialite.user_class,
-  #   :fields => [:email],
-  #   :on_failed_registration => Socialite::UsersController.action(:new)
+    # :model => Socialite.user_class,
+    # :fields => [:email],
+    # :on_failed_registration => Socialite::UsersController.action(:new)
 
   if Rails.env.production?
     # Any production specific information

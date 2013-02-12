@@ -17,7 +17,7 @@ FactoryGirl.define do
   factory :identity_user, :parent => :user do
     after(:create) do |user|
       user.identities = [
-        FactoryGirl.create(:identity, :provider => 'identity', :uid => user.uid)
+        FactoryGirl.build(:identity, :provider => 'identity', :uid => user.uid)
       ]
     end
   end
