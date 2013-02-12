@@ -10,10 +10,6 @@ module Socialite
     autoload :Helpers, 'socialite/controllers/helpers'
   end
 
-  module Helpers
-    autoload :Authentication, 'socialite/helpers/authentication.rb'
-  end
-
   module Models
     autoload :IdentityConcern, 'socialite/models/identity_concern'
     autoload :UserConcern, 'socialite/models/user_concern'
