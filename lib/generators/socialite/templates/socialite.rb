@@ -20,6 +20,15 @@ Socialite.setup do |config|
   # }
   # config.provider :twitter, ENV['TWITTER_APP_KEY'], ENV['TWITTER_SECRET']
 
+  # We highly recommended adding the omniauth-identity gem to your Gemfile.
+  # This does not enforce a password on signup, but establishes a common
+  # 'password recovery' entry point for all users.
+  #
+  # config.provider :identity,
+  #   :model => Socialite.user_class,
+  #   :fields => [:email],
+  #   :on_failed_registration => Socialite::UsersController.action(:new)
+
   if Rails.env.production?
     # Any production specific information
   elsif Rails.env.development?

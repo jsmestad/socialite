@@ -1,5 +1,6 @@
 require 'haml'
 require 'omniauth'
+require 'simple_form'
 
 module Socialite
   class Engine < ::Rails::Engine
@@ -13,17 +14,17 @@ module Socialite
       g.helper false
     end
 
-    initializer 'socialite.load_middleware', :after => :load_config_initializers do
-      Socialite.providers.each do |provider_info|
-        OmniAuth.configure do |config|
-          config.provider(*provider_info)
+    initializer 'socialite.load_middleware' do |app|
+      app.middleware.use OmniAuth::Builder do
+        Socialite.providers.each do |provider_info|
+          provider(provider_info.first, *provider_info.last)
         end
       end
     end
 
-    # ActiveSupport.on_load(:action_controller) do
-      # include Socialite::Controllers::Helpers
-    # end
+    ActiveSupport.on_load(:action_controller) do
+      include Socialite::Controllers::Helpers
+    end
 
     # ActiveSupport.on_load(:action_view) do
       # include Socialite::Helpers::Authentication

@@ -38,6 +38,13 @@ describe Socialite do
 
         its(:user_class) { should eql(Account) }
         its(:identity_class) { should eql(Authentication) }
+
+        after do
+          Socialite.setup do |c|
+            c.user_class = nil
+            c.identity_class = nil
+          end
+        end
       end
     end
 

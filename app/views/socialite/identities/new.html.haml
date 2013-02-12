@@ -1,27 +1,14 @@
 %h1 New Account
 
-= form_tag "/auth/identity/register" do
+= simple_form_for @identity, :url => '/auth/identity/register' do |f|
   - if @identity && @identity.errors.any?
     .error_messages
       %h2 #{pluralize(@identity.errors.count, "error")} prohibited this account from being saved:
       %ul
       - @identity.errors.full_messages.each do |msg|
         %li= msg
-  .field
-    = label_tag :name
-    %br
-    = text_field_tag :name, @identity.try(:name)
-  .field
-    = label_tag :email
-    %br
-    = text_field_tag :email, @identity.try(:email)
-  .field
-    = label_tag :password
-    %br
-    = password_field_tag :password
-  .field
-    = label_tag :password_confirmation
-    %br
-    = password_field_tag :password_confirmation
-  .actions
-    = submit_tag "Register"
+
+  = f.input :email, :input_html => {:name => 'email'}
+  = f.input :password, :as => 'password', :input_html => {:name => 'password'}
+  = f.input :password_confirmation, :label => "Confirm Password", :as => 'password', :input_html => {:name => 'password_confirmation'}
+  = f.button :submit, 'Register'

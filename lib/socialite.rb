@@ -31,10 +31,6 @@ module Socialite
 
   def self.provider(klass, *args)
     @@providers ||= []
-    case klass.to_sym
-    when :identity
-      args.reverse_merge!({:model => Socialite.user_class})
-    end
     @@providers << [klass, args]
   end
 

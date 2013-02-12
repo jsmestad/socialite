@@ -7,6 +7,7 @@ require 'rspec/autorun'
 
 # Testing Generators
 require 'ammeter/init'
+require 'ffaker'
 require 'factory_girl_rails'
 
 # Should matchers
@@ -22,6 +23,7 @@ ActiveRecord::Migrator.migrate File.expand_path("../dummy/db/migrate/", __FILE__
 
 RSpec.configure do |config|
   config.include RSpec::Matchers
+  config.use_transactional_fixtures = false
   config.infer_base_class_for_anonymous_controllers = false
   config.order = "random"
 

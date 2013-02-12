@@ -23,6 +23,11 @@ module Socialite
   # We ask that you don't use the :as option here, as Socialite relies on it
   # being the default of "socialite"
   mount Socialite::Engine, :at => '/socialite'
+  match '/login' => 'socialite::sessions#new'
+  match '/logout', :to => 'socialite::sessions#destroy'
+  match '/signup', :to => 'socialite::users#new'
+  match '/auth/:provider/callback', :to => 'socialite::sessions#create'
+  match '/auth/failure', :to => 'socialite::sessions#failure'
 
 }
         end
