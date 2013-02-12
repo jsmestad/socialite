@@ -17,7 +17,7 @@ Gem::Specification.new do |s|
   s.test_files  = `git ls-files -- {test,spec,features}/*`.split("\n")
   s.require_paths = ["lib"]
 
-  s.add_dependency 'rails', '~> 3.2.11'
+  s.add_dependency 'rails', '~> 3.2.12'
   s.add_dependency 'sass-rails'
   s.add_dependency 'haml'
   s.add_dependency 'omniauth', '~> 1.1.0'
@@ -38,7 +38,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'factory_girl_rails'
   s.add_development_dependency 'ffaker'
   s.add_development_dependency 'shoulda-matchers'
-  s.add_development_dependency 'capybara'
+  s.add_development_dependency 'capybara', '>= 2.0.2'
   s.add_development_dependency 'database_cleaner'
   s.add_development_dependency 'ammeter'
 end

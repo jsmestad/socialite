@@ -17,6 +17,13 @@ module Socialite
       end
     end
 
+    def failure
+      flash_message :error, 'We had trouble signing you in. Did you make sure to grant access? Please select a service below and try again.'
+      respond_with do |format|
+        format.html { redirect_back_or_default }
+      end
+    end
+
   private
 
     def identities

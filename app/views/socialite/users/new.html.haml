@@ -1,7 +1,6 @@
 -# UsersController#new registration form is ONLY used with omniauth-identity
 
 = simple_form_for @user, :url => '/auth/identity/register' do |f|
-  = @user.inspect
   %h1 Create an Account
   -# specify :input_html to avoid params nesting
   -# = f.input :name, :input_html => {:name => 'name'}

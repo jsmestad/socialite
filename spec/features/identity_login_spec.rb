@@ -1,14 +1,10 @@
 require 'spec_helper'
 
-feature "Registration" do
+# FIXME Relies on spec/dummy/config/initializers/omniauth-identity.rb or you get
+# stack/routing/middleware issues.
+#
+feature "Identity Login" do
   background do
-    Socialite.setup do |config|
-      config.provider :identity,
-        :model => User,
-        :fields => [:email],
-        :on_failed_registration => Socialite::UsersController.action(:new)
-    end
-
     FactoryGirl.create(:identity_user, :email => 'user@example.com', :password => 'caplin')
   end
 

@@ -10,8 +10,7 @@ module Socialite
 
       included do
 
-
-        # attr_accessible :email, :name, :password, :password_confirmation
+        attr_accessible :email, :name, :password, :password_confirmation
 
         has_secure_password if defined?(BCrypt)
 
@@ -38,10 +37,12 @@ module Socialite
           end
         end
 
-        def auth_key=(key)
-          super
-          validates_uniqueness_of key, :case_sensitive => false
-        end
+        def auth_key; :email; end
+
+        # def auth_key=(key)
+          # super
+          # validates_uniqueness_of key, :case_sensitive => false
+        # end
 
         def locate(search_hash)
           where(search_hash).first
