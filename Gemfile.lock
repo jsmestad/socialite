@@ -9,7 +9,7 @@ GIT
 PATH
   remote: .
   specs:
-    socialite (0.1.0.pre.2)
+    socialite (0.1.0.pre.3)
       haml
       omniauth (~> 1.1.0)
       rails (~> 3.2.12)
