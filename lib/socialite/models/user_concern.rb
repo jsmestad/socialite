@@ -32,7 +32,7 @@ module Socialite
         def create_from_omniauth(auth)
           create do |user|
             user.name = auth['info']['name']
-            user.name = auth['info']['email']
+            user.email = auth['info']['email']
             user.password ||= rand(36**10).to_s(36)
           end
         end
