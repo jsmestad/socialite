@@ -45,7 +45,7 @@ module Socialite
         # @params [Hash] the OAuth authentication hash
         # @returns [Identity]
         def create_from_omniauth(auth={})
-          create! do |identity|
+          create do |identity|
             identity.provider = auth['provider']
             identity.uid = auth['uid']
             identity.auth_hash = auth
