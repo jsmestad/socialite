@@ -22,6 +22,7 @@ describe Socialite::Generators::InstallGenerator do
   it 'should run all tasks in the generator' do
     gen = generator %w(install)
     gen.should_receive :copy_initializer
+    gen.should_receive :mount_engine
     capture(:stdout) { gen.invoke_all }
   end
 
@@ -30,7 +31,8 @@ describe Socialite::Generators::InstallGenerator do
     before do
       run_generator %w(install)
     end
-    describe 'the spec' do
+
+    describe 'the configuration file' do
       # file - gives you the absolute path where the generator will create the file
       subject { file('config/initializers/socialite.rb') }
        # should exist - verifies the file exists
@@ -38,6 +40,11 @@ describe Socialite::Generators::InstallGenerator do
 
       # should contain - verifies the file's contents
       it { should contain(/Socialite.setup do \|config\|/) }
+    end
+
+    describe 'the routes file' do
+      subject { file('config/routes.rb') }
+      it { should contain(/mount Socialite::Engine, :at => '\/socialite'/) }
     end
   end
 end

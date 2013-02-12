@@ -10,10 +10,6 @@ module Socialite
     autoload :Helpers, 'socialite/controllers/helpers'
   end
 
-  module Helpers
-    autoload :Authentication, 'socialite/helpers/authentication.rb'
-  end
-
   module Models
     autoload :IdentityConcern, 'socialite/models/identity_concern'
     autoload :UserConcern, 'socialite/models/user_concern'
@@ -35,18 +31,18 @@ module Socialite
   end
 
   def self.identity_class
-    identity_class_name.constantize
+    identity_class_name.try(:constantize)
   end
 
   def self.identity_class_name
-    @@identity_class.camelize
+    @@identity_class.try(:camelize) || 'Identity'
   end
 
   def self.user_class
-    user_class_name.constantize
+    user_class_name.try(:constantize)
   end
 
   def self.user_class_name
-    @@user_class.camelize
+    @@user_class.try(:camelize) || 'User'
   end
 end

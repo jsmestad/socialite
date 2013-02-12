@@ -2,8 +2,8 @@ module Socialite
   shared_examples 'identity' do
     it { should belong_to(:user) }
 
-    it { should have_db_column(:uid) }
-    it { should have_db_column(:provider) }
+    it { should have_db_column(:uid).of_type(:string) }
+    it { should have_db_column(:provider).of_type(:string) }
     it { should have_db_column(:auth_hash) }
 
     it { should validate_presence_of(:uid) }
@@ -25,7 +25,7 @@ module Socialite
       end
 
       describe 'facebook' do
-        subject { identity_class.find_or_initialize_by_omniauth(auth_hash) }
+        subject { identity_class.find_or_create_from_omniauth(auth_hash) }
 
         it { should be_a(identity_class) }
         its(:persisted?) { should be_false }
@@ -35,7 +35,7 @@ module Socialite
           let(:identity) { user.identities.first }
           let(:auth_hash) { identity.auth_hash.merge('provider' => identity.provider, 'uid' => identity.uid) }
 
-          subject { identity_class.find_or_initialize_by_omniauth(auth_hash) }
+          subject { identity_class.find_or_create_from_omniauth(auth_hash) }
 
           before do
             user.identities.count.should > 0
@@ -47,25 +47,6 @@ module Socialite
           its(:user) { should eql(user) }
         end
       end
-
-      # describe 'twitter' do
-      #   let(:twitter_identity) { subject.find_or_initialize_by_oauth(auth_hash.merge('provider' => 'twitter')) }
-      #   subject { twitter_identity }
-
-      #   it { should be_a(Identity) }
-      #   its(:persisted?) { should be_true }
-      #   its(:user) { should be_a(User) }
-      # end
     end
   end
-
-  # shared_examples 'facebook api' do
-    # it { should respond_to(:account_url) }
-    # it { should respond_to(:api) }
-    # it { should respond_to(:api_connection) }
-    # it { should respond_to(:checkins) }
-    # it { should respond_to(:friends) }
-    # it { should respond_to(:picture) }
-    # it { should respond_to(:info) }
-  # end
 end
