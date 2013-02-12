@@ -58,7 +58,7 @@ module Socialite
     end
 
     def destroy
-      logout!
+      self.current_user = nil
       redirect_to main_app.root_url, :notice => 'Signed out!'
     end
 
