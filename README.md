@@ -1,9 +1,7 @@
-# Socialite
+# Socialite [![Build Status](https://travis-ci.org/jsmestad/socialite.png?branch=master)](https://travis-ci.org/jsmestad/socialite)
 
 This is an opinionated Rails 3.1 mountable engine provides your application with
 support for managing multiple OAuth providers per User.
-
-[![Build Status](https://travis-ci.org/jsmestad/socialite.png)](https://travis-ci.org/jsmestad/socialite)
 
 ## Why make this?
 
