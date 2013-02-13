@@ -9,7 +9,6 @@ module Socialite
       include OmniAuth::Identity::SecurePassword
 
       included do
-
         attr_accessible :email, :name, :password, :password_confirmation
 
         has_secure_password if defined?(BCrypt)
@@ -33,6 +32,7 @@ module Socialite
           create do |user|
             user.name = auth['info']['name']
             user.email = auth['info']['email']
+            user.email ||= "#{auth['info']['name']}@#{auth['provider']}.com"
             user.password ||= rand(36**10).to_s(36)
           end
         end

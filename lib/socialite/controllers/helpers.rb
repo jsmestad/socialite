@@ -8,7 +8,9 @@ module Socialite
       end
 
       def current_user
-        @current_user ||= Socialite.user_class.find(session[:user_id])
+        @current_user ||= if session.has_key?(:user_id)
+                            Socialite.user_class.find_by_id(session[:user_id])
+                          end
       end
 
       def user_signed_in?
