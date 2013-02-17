@@ -1,5 +1,5 @@
 module Socialite
-  class SessionsController < ApplicationController
+  class SessionsController < SocialiteController
     unloadable
 
     def new
