@@ -9,8 +9,24 @@ module Socialite
 
       def current_user
         @current_user ||= if session.has_key?(:user_id)
-                            Socialite.user_class.find_by_id(session[:user_id])
+                            Socialite.user_class.find(session[:user_id])
                           end
+      rescue ActiveRecord::RecordNotFound
+        session[:user_id] = nil
+      end
+
+      def ensure_user
+        if defined?(super)
+          super
+        else
+          unless user_signed_in?
+            redirect_to login_path, :alert => 'You must be logged in to use this feature.'
+          end
+        end
+      end
+
+      def logout!
+        self.current_user = nil and session.destroy
       end
 
       def user_signed_in?
