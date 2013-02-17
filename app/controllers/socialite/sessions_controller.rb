@@ -2,8 +2,13 @@ module Socialite
   class SessionsController < SocialiteController
     unloadable
 
+    before_filter :ensure_user, only: [:destroy]
+
+    # Login Page
     def new
-      # Login Page
+      if current_user
+        redirect_to main_app.root_path, :alert => 'You are already registered.'
+      end
     end
 
     def create
