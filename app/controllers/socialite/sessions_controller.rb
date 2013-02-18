@@ -47,7 +47,7 @@ module Socialite
                    # So we just load it up
                  else
                    # otherwise we have to create a user with the auth hash
-                   Socialite.user_class.create_from_omniauth(auth)
+                   Socialite.user_class.find_or_create_from_omniauth(auth)
                    # NOTE: we will handle the different types of data we get back
                    # from providers at the model level in create_from_omniauth
                  end

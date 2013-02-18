@@ -28,6 +28,18 @@ module Socialite
         # include OmniAuth::Identity::Model#::ClassMethods
         # include OmniAuth::Identity::SecurePassword::ClassMethods
 
+        def find_from_omniauth(auth)
+          if auth['info']['email']
+            find_by_email(auth['info']['email'])
+          else
+            find_by_email("#{auth['info']['name']}@#{auth['provider']}.com")
+          end
+        end
+
+        def find_or_create_from_omniauth(auth)
+          find_from_omniauth(auth) || create_from_omniauth(auth)
+        end
+
         def create_from_omniauth(auth)
           create do |user|
             user.name = auth['info']['name']
