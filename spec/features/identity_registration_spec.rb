@@ -24,7 +24,7 @@ feature "Identity Registration" do
     fill_in 'password', :with => 'secrets'
     fill_in 'password_confirmation', :with => 'secrets'
     click_button 'Sign Up'
-    page.should have_text 'Welcome to The app!'
+    page.should have_text 'Welcome to the app!'
     page.should have_no_css('.error')
     page.should have_no_button('Sign Up')
   end

@@ -37,6 +37,26 @@ module Socialite
         @current_user = user
         session[:user_id] = user.nil? ? user : user.id
       end
+
+      def after_link_path
+        main_app.root_path
+      end
+
+      def after_signup_path
+        main_app.root_path
+      end
+
+      def after_failure_path
+        main_app.root_path
+      end
+
+      def after_login_path
+        main_app.root_path
+      end
+
+      def after_logout_path
+        main_app.root_path
+      end
     end
   end
 end

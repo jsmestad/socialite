@@ -22,20 +22,20 @@ module Socialite
           # account. But we found the identity and the user associated with it
           # is the current user. So the identity is already associated with
           # this user. So let's display an error message.
-          redirect_to main_app.root_url, :notice => "You have already linked this account"
+          redirect_to after_link_path, :notice => "You have already linked this account"
         else
           # The identity is not associated with the current_user so lets
           # associate the identity.
           @identity.user = current_user
           @identity.save
-          redirect_to main_app.root_url, :notice => "Account successfully authenticated"
+          redirect_to after_link_path, :notice => "Account successfully authenticated"
         end
       else # User is not logged in, this is a new signin
         if @identity.user.present?
           # The identity we found had a user associated with it so let's
           # just log them in here
           self.current_user = @identity.user
-          redirect_to main_app.root_url, :notice => "Signed in!"
+          redirect_to after_login_path, :notice => "Signed in!"
         else
           # The authentication has no user assigned and there is no user signed in
           # Our decision here is to create a new account for the user
@@ -54,7 +54,7 @@ module Socialite
           # We can now link the authentication with the user and log him in
           user.identities << @identity
           self.current_user = user
-          redirect_to main_app.root_path, notice: "Welcome to The app!"
+          redirect_to after_signup_path, notice: "Welcome to the app!"
 
           # No user associated with the identity so we need to create a new one
           # redirect_to new_user_url, :notice => "Please finish registering"
@@ -63,11 +63,12 @@ module Socialite
     end
 
     def destroy
-      logout! && redirect_to(main_app.root_url, :notice => 'Signed out!')
+      logout!
+      redirect_to(main_app.root_url, :notice => 'Signed out!')
     end
 
     def failure
-      redirect_to main_app.root_url, :alert => "Authentication failed, please try again."
+      redirect_to after_failure_path, :alert => "Authentication failed, please try again."
     end
   end
 end

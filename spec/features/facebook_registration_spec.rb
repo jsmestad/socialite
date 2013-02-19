@@ -10,7 +10,7 @@ feature "Facebook Registration", :omniauth => true do
 
   scenario "Signing up with Facebook" do
     visit '/auth/facebook'
-    page.should have_text 'Welcome to The app!'
+    page.should have_text 'Welcome to the app!'
   end
 end
 
