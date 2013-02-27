@@ -1,20 +1,9 @@
+require 'socialite/controllers/helpers'
+require 'socialite/models/identity_concern'
+require 'socialite/models/user_concern'
 require 'socialite/engine'
 
-require 'haml'
-require 'omniauth'
-
 module Socialite
-  autoload :ControllerSupport, 'socialite/controller_support'
-
-  module Controllers
-    autoload :Helpers, 'socialite/controllers/helpers'
-  end
-
-  module Models
-    autoload :IdentityConcern, 'socialite/models/identity_concern'
-    autoload :UserConcern, 'socialite/models/user_concern'
-  end
-
   def self.setup
     yield self if block_given?
   end

@@ -1,4 +1,3 @@
-require 'omniauth-identity'
 require 'socialite/ext/omniauth/identity/model'
 
 module Socialite
@@ -25,9 +24,6 @@ module Socialite
       end
 
       module ClassMethods
-        # include OmniAuth::Identity::Model#::ClassMethods
-        # include OmniAuth::Identity::SecurePassword::ClassMethods
-
         def find_from_omniauth(auth)
           if auth['info']['email']
             find_by_email(auth['info']['email'])
@@ -50,11 +46,6 @@ module Socialite
         end
 
         def auth_key; :email; end
-
-        # def auth_key=(key)
-          # super
-          # validates_uniqueness_of key, :case_sensitive => false
-        # end
 
         def locate(search_hash)
           where(search_hash).first
