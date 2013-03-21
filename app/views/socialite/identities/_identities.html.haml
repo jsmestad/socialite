@@ -1,14 +1,15 @@
+- i18n_scope = "socialite.labels"
 %table
   %thead
-    %th Provider
-    %th Unique ID
-    %th Additional
-    %th Actions
+    %th= I18n.t('provider', scope: i18n_scope)
+    %th= I18n.t('unique_id', scope: i18n_scope)
+    %th= I18n.t('additional_auth_information', scope: i18n_scope)
+    %th= I18n.t('actions', scope: i18n_scope)
   - identities.each do |identity|
     %tr
       %td= identity.provider
       %td= identity.unique_id
       %td= identity.auth_hash
       %td
-        = link_to 'Unlink', user_identity_path(identity), :method => :delete, :confirm => 'Are you sure?'
+        = link_to I18n.t('unlink_account', scope: i18n_scope), user_identity_path(identity), :method => :delete, :confirm => I18n.t('socialite.confirm_unlink')
 

@@ -1,0 +1,53 @@
+en:
+  socialite:
+    already_registered: "You are already registered"
+    already_linked_account: "You have already linked this account"
+    successful_signup: "Account successfully authenticated"
+    successful_signin: "Signed in!"
+    successful_signout: "Signed out!"
+    unsuccessful_signup: "Authentication failed, please try again."
+    welcome: "Welcome to the app!"
+    confirm_unlink: "Are your sure?"
+    login_required: "You must be logged in to use this feature"
+
+    identities:
+      new:
+        header: "New Account"
+        submit_label: "Register"
+
+    sessions:
+      new:
+        header: "Sign In"
+        services_header: "Sign in through one of these services:"
+        identity_header: "Don't use these services?"
+        create_account_link_text: "Create an account"
+        create_account_text:
+          html: "%{create_account_link} or login below."
+
+    users:
+      new:
+        header: "Create an Account"
+
+    #### Providers
+    providers:
+      twitter: "Twitter"
+      facebook: "Facebook"
+
+    #### LABELS
+    labels:
+      provider: "Provider"
+      unique_id: "Unique ID"
+      additional_auth_information: "Additional"
+      actions: "Actions"
+      auth_key: "Email"
+      password: "Password"
+      unlink_account: "Unlink"
+      register: "Register"
+      confirm_password: "Confirm Password"
+      sign_up: "Sign Up!"
+      sign_in: "Sign in"
+
+    errors:
+      create_fail:
+        one: "%{error_count} error prohibited this account from being saved:"
+        other: "%{error_count} errors prohibited this account from being saved:"

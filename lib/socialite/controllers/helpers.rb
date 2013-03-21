@@ -20,7 +20,7 @@ module Socialite
           super
         else
           unless user_signed_in?
-            redirect_to login_path, :alert => 'You must be logged in to use this feature.'
+            redirect_to login_path, :alert => I18n.t('socialite.login_required')
           end
         end
       end
