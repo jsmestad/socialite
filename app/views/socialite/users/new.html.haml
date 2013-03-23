@@ -1,10 +1,12 @@
 -# UsersController#new registration form is ONLY used with omniauth-identity
+- i18n_scope = "socialite.users.new"
+- labels_scope = "socialite.labels"
 
-= simple_form_for @user, :url => '/auth/identity/register' do |f|
-  %h1 Create an Account
+= simple_form_for(@user, :url => '/auth/identity/register') do |f|
+  %h1= I18n.t(:header, scope: i18n_scope)
   -# specify :input_html to avoid params nesting
   -# = f.input :name, :input_html => {:name => 'name'}
   = f.input :email, :input_html => {:name => 'email'}
   = f.input :password, :as => 'password', :input_html => {:name => 'password'}
-  = f.input :password_confirmation, :label => "Confirm Password", :as => 'password', :input_html => {:name => 'password_confirmation'}
-  = f.button :submit, 'Sign Up'
+  = f.input :password_confirmation, :label => I18n.t(:confirm_password, scope: labels_scope), :as => 'password', :input_html => {:name => 'password_confirmation'}
+  = f.button :submit, I18n.t(:sign_up, scope: labels_scope)

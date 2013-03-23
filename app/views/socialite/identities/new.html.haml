@@ -1,14 +1,15 @@
-%h1 New Account
+- i18n_scope = "socialite.identities.new"
+%h1= I18n.t('header', scope: i18n_scope)
 
 = simple_form_for @identity, :url => '/auth/identity/register' do |f|
   - if @identity && @identity.errors.any?
     .error_messages
-      %h2 #{pluralize(@identity.errors.count, "error")} prohibited this account from being saved:
+      %h2= I18n.t('socialite.errors.create_fail', :count => @identity.errors.count)
       %ul
       - @identity.errors.full_messages.each do |msg|
         %li= msg
 
   = f.input :email, :input_html => {:name => 'email'}
   = f.input :password, :as => 'password', :input_html => {:name => 'password'}
-  = f.input :password_confirmation, :label => "Confirm Password", :as => 'password', :input_html => {:name => 'password_confirmation'}
-  = f.button :submit, 'Register'
+  = f.input :password_confirmation, :label => I18n.t('socialite.labels.confirm_password'), :as => 'password', :input_html => {:name => 'password_confirmation'}
+  = f.button :submit, I18n.t(:sign_up, scope: labels_scope)
