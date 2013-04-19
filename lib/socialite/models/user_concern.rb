@@ -20,7 +20,8 @@ module Socialite
         validates :email,
           :presence => true,
           :format => { :with => /.+@.+\..+/i },
-          :uniqueness => { :case_sensitive => false }
+          :uniqueness => { :case_sensitive => false },
+          :if => :authorized?
       end
 
       module ClassMethods
@@ -91,6 +92,14 @@ module Socialite
           # save(:validate => false)
         # end
       # end
+
+      # Used for overloading the validations on username and email.
+      #
+      # @return [Boolean]
+      def authorized?
+        true
+      end
+      end
     end
   end
 end
