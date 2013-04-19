@@ -99,7 +99,6 @@ module Socialite
       def authorized?
         true
       end
-      end
     end
   end
 end

@@ -12,6 +12,7 @@ PATH
     socialite (0.1.0.pre.6)
       haml
       omniauth (~> 1.1.0)
+      omniauth-identity
       rails (~> 3.2.12)
       sass-rails
 
