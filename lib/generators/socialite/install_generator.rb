@@ -10,6 +10,11 @@ module Socialite
         template 'socialite.rb', 'config/initializers/socialite.rb'
       end
 
+      desc 'Copies the socialite i18n translation file'
+      def copy_locale
+        copy_file "../../../config/locales/en.yml", "config/locales/socialite.en.yml"
+      end
+
       def mount_engine
         puts "Mounting Socialite::Engine at \"/socialite\" in config/routes.rb..."
         insert_into_file("config/routes.rb", :after => /routes.draw.do\n/) do
