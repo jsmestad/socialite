@@ -12,7 +12,7 @@ module Socialite
 
       desc 'Copies the socialite i18n translation file'
       def copy_locale
-        copy_file "../../../config/locales/en.yml", "config/locales/socialite.en.yml"
+        copy_file "../../../../config/locales/en.yml", "config/locales/socialite.en.yml"
       end
 
       def mount_engine
