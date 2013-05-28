@@ -9,7 +9,8 @@ GIT
 PATH
   remote: .
   specs:
-    socialite (0.1.0.pre.6)
+    socialite (0.1.0.pre.7)
+      bcrypt-ruby (>= 3.0.0)
       haml
       omniauth (~> 1.1.0)
       omniauth-identity
@@ -169,7 +170,7 @@ GEM
       rspec-expectations (~> 2.12.0)
       rspec-mocks (~> 2.12.0)
     rubyzip (0.9.9)
-    sass (3.2.7)
+    sass (3.2.9)
     sass-rails (3.2.6)
       railties (~> 3.2.0)
       sass (>= 3.1.10)
@@ -182,7 +183,7 @@ GEM
     shoulda-matchers (1.4.2)
       activesupport (>= 3.0.0)
       bourne (~> 1.1.2)
-    simple_form (2.0.4)
+    simple_form (2.1.0)
       actionpack (~> 3.0)
       activemodel (~> 3.0)
     sprockets (2.2.2)
@@ -207,7 +208,6 @@ PLATFORMS
 
 DEPENDENCIES
   ammeter
-  bcrypt-ruby (>= 3.0.0)
   capybara (>= 2.0.2)
   database_cleaner
   factory_girl_rails

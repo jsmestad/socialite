@@ -1,6 +1,5 @@
 require 'haml'
 require 'omniauth'
-require 'simple_form'
 
 module Socialite
   class Engine < ::Rails::Engine
