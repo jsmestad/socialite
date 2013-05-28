@@ -1,3 +1,6 @@
+require 'socialite'
+require 'simple_form'
+
 Socialite.setup do |config|
   ## Configure Classes
   # If you are not using the default names set below. Please change them to

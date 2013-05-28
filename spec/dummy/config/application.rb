@@ -10,6 +10,7 @@ require "sprockets/railtie"
 
 Bundler.require
 require "socialite"
+require "simple_form" # TODO FIXME remove this dependency all together.
 
 module Dummy
   class Application < Rails::Application
