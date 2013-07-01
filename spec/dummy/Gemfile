@@ -1,0 +1,4 @@
+# Test Gemfile
+
+gem "omniauth-identity"
+gem "bcrypt-ruby", ">=3"

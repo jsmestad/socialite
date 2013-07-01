@@ -17,14 +17,16 @@ Gem::Specification.new do |s|
   s.test_files  = `git ls-files -- {test,spec,features}/*`.split("\n")
   s.require_paths = ["lib"]
 
-  s.add_dependency 'rails', '~> 3.2.12'
+  s.add_dependency 'rails', '>=3'
   s.add_dependency 'sass-rails'
   s.add_dependency 'haml'
   s.add_dependency 'omniauth', '~> 1.1.0'
+  s.add_dependency 'omniauth-identity'
+  s.add_dependency 'simple_form'
 
   # Optional Gem Dependencies
-  s.add_development_dependency 'bcrypt-ruby', '>= 3.0.0'
-  s.add_development_dependency 'simple_form'
+  #s.add_development_dependency 'bcrypt-ruby', '>= 3.0.0'
+  #s.add_development_dependency 'simple_form'
 
   # Various OmniAuth gems we test against
   s.add_development_dependency 'omniauth-identity'

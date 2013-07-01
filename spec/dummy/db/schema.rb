@@ -11,7 +11,20 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130207223010) do
+ActiveRecord::Schema.define(:version => 20130601083232) do
+
+  create_table "identities", :force => true do |t|
+    t.string   "uid"
+    t.string   "provider"
+    t.text     "auth_hash"
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "identities", ["provider", "uid"], :name => "index_identities_on_provider_and_uid", :unique => true
+  add_index "identities", ["user_id", "provider"], :name => "index_identities_on_user_id_and_provider", :unique => true
+  add_index "identities", ["user_id"], :name => "index_identities_on_user_id"
 
   create_table "socialite_identities", :force => true do |t|
     t.string   "uid"
@@ -35,5 +48,16 @@ ActiveRecord::Schema.define(:version => 20130207223010) do
   end
 
   add_index "socialite_users", ["email"], :name => "index_socialite_users_on_email", :unique => true
+
+  create_table "users", :force => true do |t|
+    t.string   "name"
+    t.string   "email"
+    t.string   "password_digest"
+    t.boolean  "placeholder_email"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+  end
+
+  add_index "users", ["email"], :name => "index_users_on_email", :unique => true
 
 end

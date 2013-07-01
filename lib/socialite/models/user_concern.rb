@@ -8,19 +8,7 @@ module Socialite
       include OmniAuth::Identity::SecurePassword
 
       included do
-        attr_accessible :email, :name, :password, :password_confirmation
-
         has_secure_password if defined?(BCrypt)
-
-        has_many :identities,
-          :dependent => :destroy,
-          :class_name => Socialite.identity_class_name,
-          :foreign_key => "#{Socialite.user_class.table_name.singularize}_id"
-
-        validates :email,
-          :presence => true,
-          :format => { :with => /.+@.+\..+/i },
-          :uniqueness => { :case_sensitive => false }
       end
 
       module ClassMethods
@@ -40,7 +28,10 @@ module Socialite
           create do |user|
             user.name = auth['info']['name']
             user.email = auth['info']['email']
-            user.email ||= "#{auth['info']['nickname']}@#{auth['provider']}.com"
+            unless user.email.present?
+              user.email = "#{auth['info']['nickname']}@#{auth['provider']}.com"
+              user.placeholder_email = true if user.respond_to?(:"placeholder_email=")
+            end
             user.password ||= rand(36**10).to_s(36)
           end
         end
@@ -48,7 +39,11 @@ module Socialite
         def auth_key; :email; end
 
         def locate(search_hash)
-          where(search_hash).first
+          if Hash === search_hash
+            where(search_hash).first
+          else
+            where(:email => search_hash).first
+          end
         end
       end
 
@@ -74,23 +69,6 @@ module Socialite
         self.twitter_identity
       end
 
-      # Set the user's remember token
-      #
-      # @return [User] the current user
-      # def remember_me!
-        # self.remember_token = Socialite.generate_token
-        # save(:validate => false)
-      # end
-
-      # Clear the user's remember token
-      #
-      # @return [User] the current user
-      # def forget_me!
-        # if persisted?
-          # self.remember_token = nil
-          # save(:validate => false)
-        # end
-      # end
     end
   end
 end

@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-class Account; end
-class Authentication; end
+class ::Account; end
+class ::Authentication; end
 
 class User; end
 class Identity; end
@@ -19,8 +19,8 @@ describe Socialite do
       describe 'the default values' do
         before do
           Socialite.setup do |c|
-            c.user_class = nil
-            c.identity_class = nil
+            c.user_class_name = nil
+            c.identity_class_name = nil
           end
         end
 
@@ -31,8 +31,8 @@ describe Socialite do
       describe 'accessors that manipulate default values' do
         before do
           Socialite.setup do |c|
-            c.user_class = 'Account'
-            c.identity_class = 'Authentication'
+            c.user_class_name = 'Account'
+            c.identity_class_name = 'Authentication'
           end
         end
 
@@ -41,8 +41,8 @@ describe Socialite do
 
         after do
           Socialite.setup do |c|
-            c.user_class = nil
-            c.identity_class = nil
+            c.user_class_name = nil
+            c.identity_class_name = nil
           end
         end
       end

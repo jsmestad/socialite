@@ -1,0 +1,29 @@
+class CreateSocialite < ActiveRecord::Migration
+  def change
+    <% if !user_class_exists? %>
+    create_table :<%= plural_user_name %> do |t|
+      t.string :name, :email
+      t.string :password_digest
+      t.boolean :placeholder_email
+      t.timestamps
+    end
+    add_index :<%= plural_user_name %>, :email, :unique => true
+    <% end %>
+    <% if !identity_class_exists? %>
+    create_table :<%= plural_identity_name %> do |t|
+      t.string :uid, :provider
+      t.text :auth_hash
+      t.integer :<%= singular_user_name %>_id
+      t.timestamps
+    end
+
+    add_index :<%= plural_identity_name%>, :<%= singular_user_name %>_id
+
+    # Restrict each user to one identity per provider, to disable comment out.
+    add_index :<%= plural_identity_name %>, [:<%= singular_user_name %>_id, :provider], :unique => true
+
+    # Database constraint to ensure uniqueness of UIDs (scoped to provider)
+    add_index :<%= plural_identity_name %>, [:provider, :uid], :unique => true
+    <% end %>
+  end
+end

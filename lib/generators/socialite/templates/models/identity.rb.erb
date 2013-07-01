@@ -1,9 +1,9 @@
-class Identity < ActiveRecord::Base
+class <%= identity_class_name %> < ActiveRecord::Base
   include Socialite::Models::IdentityConcern
 
   belongs_to :user,
     :class_name => Socialite.user_class_name,
-    :foreign_key => :user_id
+    :foreign_key => :<%= singular_user_name %>_id
 
   serialize :auth_hash
 
@@ -20,7 +20,7 @@ class Identity < ActiveRecord::Base
   # Ensure each user has only a single identity per provider type
   validates :provider,
     :uniqueness => {
-    :scope => :user_id,
+    :scope => :<%= singular_user_name %>_id,
       :case_sensitive => false
     },
     :presence => true
@@ -32,7 +32,7 @@ class Identity < ActiveRecord::Base
 
   # Ensure an associated user exists before creating the identity
   # validates_associated :user
-
+  
   # Finder method that finds the matching Provider and Unique ID or
   # initializes a new, unsaved, object.
   #
@@ -45,7 +45,7 @@ class Identity < ActiveRecord::Base
   def self.find_or_create_from_omniauth(auth)
     super
   end
-
+  
   # Finder method that finds the matching Provider and UID.
   #
   # @params [Hash] the OmniAuth authentication hash

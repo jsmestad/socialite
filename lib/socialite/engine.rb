@@ -4,7 +4,6 @@ require 'simple_form'
 
 module Socialite
   class Engine < ::Rails::Engine
-    isolate_namespace Socialite
 
     config.generators do |g|
       g.test_framework :rspec, :fixture => false
@@ -25,5 +24,6 @@ module Socialite
     ActiveSupport.on_load(:action_controller) do
       include Socialite::Controllers::Helpers
     end
+
   end
 end

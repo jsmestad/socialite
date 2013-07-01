@@ -3,41 +3,6 @@ module Socialite
     module IdentityConcern
       extend ActiveSupport::Concern
 
-      included do
-        attr_accessible :provider, :uid, :user_id, :auth_hash
-
-        belongs_to :user,
-          :class_name => Socialite.user_class_name,
-          :foreign_key => "#{Socialite.user_class.table_name.singularize}_id"
-        serialize :auth_hash
-
-        # Ensure that before validation happens that the provider
-        # database column matches what is inside of the auth_hash
-        # dataset.
-        before_validation do |identity|
-          if identity.auth_hash.present?
-            identity.provider = identity.auth_hash.delete('provider') if identity.provider.blank?
-            identity.uid = identity.auth_hash.delete('uid') if identity.uid.blank?
-          end
-        end
-
-        # Ensure each user has only a single identity per provider type
-        validates :provider,
-          :uniqueness => {
-            :scope => "#{Socialite.user_class.table_name.singularize}_id",
-            :case_sensitive => false
-          },
-          :presence => true
-
-        # Ensure an identity is never reused by another account
-        validates :uid,
-          :uniqueness => {:scope => :provider},
-          :presence => true
-
-        # Ensure an associated user exists before creating the identity
-        # validates_associated :user
-      end
-
       module ClassMethods
         # Finder method that finds the matching Provider and Unique ID or
         # initializes a new, unsaved, object.

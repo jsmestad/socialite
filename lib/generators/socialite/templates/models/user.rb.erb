@@ -1,10 +1,10 @@
-class User < ActiveRecord::Base
+class <%= user_class_name %> < ActiveRecord::Base
   include Socialite::Models::UserConcern
 
   has_many :identities,
     :dependent => :destroy,
     :class_name => Socialite.identity_class_name,
-    :foreign_key => :user_id
+    :foreign_key => :<%= singular_user_name %>_id
 
   validates :email,
     :presence => true,
@@ -12,8 +12,8 @@ class User < ActiveRecord::Base
     :uniqueness => { :case_sensitive => false }
 
   attr_accessible :email, :password, :password_confirmation
-
-  def self.find_from_omniauth(auth);           super; end
+ 
+  def self.find_from_omniauth(auth);           super; end 
   def self.find_or_create_from_omniauth(auth); super; end
   def self.create_from_omniauth(auth);         super; end
 
