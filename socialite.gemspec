@@ -18,6 +18,7 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
 
   s.add_runtime_dependency 'rails', ['>= 3.2', "<= 4.2"]
+  s.add_runtime_dependency 'protected_attributes' # required for Rails 4 compatibility until attr_accessor is removed
   s.add_runtime_dependency 'sass-rails'
   s.add_runtime_dependency 'haml'
   s.add_runtime_dependency 'omniauth', '~> 1.1.0'
