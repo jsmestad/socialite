@@ -5,7 +5,7 @@ before_script:
 rvm:
   - 1.9.2
   - 1.9.3
-  - 2.0.0-rc1
+  - 2.0.0
 script:
   - rake --quiet db:migrate 
   - rspec spec
