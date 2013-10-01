@@ -9,6 +9,17 @@ module Socialite
 
       included do
         has_secure_password if defined?(BCrypt)
+
+        has_many :identities,
+          :dependent => :destroy,
+          :class_name => Socialite.identity_class_name,
+          :foreign_key => "#{Socialite.user_class.table_name.singularize}_id"
+
+        validates :email,
+          :presence => true,
+          :format => { :with => /.+@.+\..+/i },
+          :uniqueness => { :case_sensitive => false },
+          :if => :authorized?
       end
 
       module ClassMethods
@@ -69,6 +80,30 @@ module Socialite
         self.twitter_identity
       end
 
+      # Set the user's remember token
+      #
+      # @return [User] the current user
+      # def remember_me!
+        # self.remember_token = Socialite.generate_token
+        # save(:validate => false)
+      # end
+
+      # Clear the user's remember token
+      #
+      # @return [User] the current user
+      # def forget_me!
+        # if persisted?
+          # self.remember_token = nil
+          # save(:validate => false)
+        # end
+      # end
+
+      # Used for overloading the validations on username and email.
+      #
+      # @return [Boolean]
+      def authorized?
+        true
+      end
     end
   end
 end

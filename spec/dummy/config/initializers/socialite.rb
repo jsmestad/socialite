@@ -1,3 +1,5 @@
+require 'socialite'
+
 Socialite.setup do |config|
   ## Configure Classes
   # If you are not using the default names set below. Please change them to
@@ -21,13 +23,13 @@ Socialite.setup do |config|
   # This does not enforce a password on signup, but establishes a common
   # 'password recovery' entry point for all users.
   #
-  
+
   config.use_omniauth_identity = false
   # config.provider :identity,
   #   :model => Socialite.user_class,
   #   :fields => [:email],
   #   :on_failed_registration => Socialite::UsersController.action(:new)
-  
+
 
   if Rails.env.production?
     # Any production specific information

@@ -1,5 +1,6 @@
 .DS_Store
 .bundle/
+.idea/
 log/*.log
 pkg/
 spec/dummy/db/*.sqlite3

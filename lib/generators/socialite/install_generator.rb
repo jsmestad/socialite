@@ -23,7 +23,8 @@ module Socialite
         template 'socialite.rb.tt', 'config/initializers/socialite.rb'
       end
 
-      private
+    private
+
       def use_omniauth_identity?
         return true if Rails.env.test?
         return @use_omniauth_identity if defined?(@use_omniauth_identity)
@@ -37,17 +38,31 @@ TXT
         end
       end
 
-      def ask_about_user_model
-        return Socialite.user_class_name if Rails.env.test?
-        if user_model_exists?
-          if yes?("Would you like to use the #{Socialite.user_class_name} model?")
-            Socialite.user_class_name
-          else
-            ask("What model name would you like to use as the user Model: ").classify
-          end
-        else
-          name = ask("What model name would you like to use as the user model (#{Socialite.user_class_name} is default): ")
-          name.blank? ? Socialite.user_class_name : name.classify
+      desc 'Copies the socialite i18n translation file'
+      def copy_locale
+        copy_file "../../../../config/locales/en.yml", "config/locales/socialite.en.yml"
+      end
+
+      def mount_engine
+        puts "Mounting Socialite::Engine at \"/socialite\" in config/routes.rb..."
+        insert_into_file("config/routes.rb", :after => /routes.draw.do\n/) do
+          %Q{
+  # This line mounts Socialite's routes at /socialite by default.
+  # This means, any requests to the /socialite URL of your application will go
+  # to Socialite::SessionsController#new. If you would like to change where
+  # this extension is mounted, simply change the :at option to something
+  # different.
+  #
+  # We ask that you don't use the :as option here, as Socialite relies on it
+  # being the default of "socialite"
+  mount Socialite::Engine, :at => '/socialite'
+  match '/login' => 'socialite::sessions#new'
+  match '/logout', :to => 'socialite::sessions#destroy'
+  match '/signup', :to => 'socialite::users#new'
+  match '/auth/:provider/callback', :to => 'socialite::sessions#create'
+  match '/auth/failure', :to => 'socialite::sessions#failure'
+
+}
         end
       end
 

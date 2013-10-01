@@ -1,31 +1,33 @@
-%h1 Sign In
+- i18n_scope = "socialite.sessions.new"
+- labels_scope = "socialite.labels"
+
+%h1= I18n.t(:header, scope: i18n_scope)
 
 %p
-  %strong Sign in through one of these services:
+  %strong= I18n.t(:services_header, scope: i18n_scope)
 
 .auth_providers
   - if defined?(OmniAuth::Strategies::Twitter)
     %a.auth_provider{:href => "/auth/twitter"}
-      = image_tag "socialite/twitter_64.png", :size => "64x64", :alt => "Twitter"
-      Twitter
+      = image_tag "twitter_64.png", :size => "64x64", :alt => I18n.t('socialite.providers.twitter')
+      = I18n.t('socialite.providers.twitter')
   - if defined?(OmniAuth::Strategies::Facebook)
     %a.auth_provider{:href => "/auth/facebook"}
-      = image_tag "socialite/facebook_64.png", :size => "64x64", :alt => "Facebook"
-      Facebook
+      = image_tag "facebook_64.png", :size => "64x64", :alt => I18n.t('socialite.providers.facebook')
+      = I18n.t('socialite.providers.facebook')
 
-- if Socialite.config.use_omniauth_identity
-  %p
-    %strong Don't use these services?
-    #{link_to "Create an account", signup_path} or login below.
+%p
+  %strong= I18n.t(:identity_header, scope: i18n_scope)
+  = I18n.t('create_account_text.html', scope: i18n_scope, :create_account_link => link_to(I18n.t('create_account_link_text', scope: i18n_scope), signup_path))
 
-  = form_tag "/auth/identity/callback" do
-    .field
-      = label_tag :auth_key, "Email"
-      %br
-      = text_field_tag :auth_key
-    .field
-      = label_tag :password
-      %br
-      = password_field_tag :password
-    .actions
-      = submit_tag "Sign in"
+= form_tag "/auth/identity/callback" do
+  .field
+    = label_tag :auth_key, I18n.t(:auth_key, scope: labels_scope)
+    %br
+    = text_field_tag :auth_key
+  .field
+    = label_tag :password, I18n.t(:password, scope: labels_scope)
+    %br
+    = password_field_tag :password
+  .actions
+    = submit_tag I18n.t(:sign_in, scope: labels_scope)

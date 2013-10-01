@@ -1,6 +1,6 @@
 require 'haml'
 require 'omniauth'
-require 'simple_form'
+require 'protected_attributes' if Rails.version =~ /^4/
 
 module Socialite
   class Engine < ::Rails::Engine
