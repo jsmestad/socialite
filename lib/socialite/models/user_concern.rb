@@ -8,8 +8,6 @@ module Socialite
       include OmniAuth::Identity::SecurePassword
 
       included do
-        attr_accessible :email, :name, :password, :password_confirmation
-
         has_secure_password if defined?(BCrypt)
 
         has_many :identities,
@@ -41,7 +39,10 @@ module Socialite
           create do |user|
             user.name = auth['info']['name']
             user.email = auth['info']['email']
-            user.email ||= "#{auth['info']['nickname']}@#{auth['provider']}.com"
+            unless user.email.present?
+              user.email = "#{auth['info']['nickname']}@#{auth['provider']}.com"
+              user.placeholder_email = true if user.respond_to?(:"placeholder_email=")
+            end
             user.password ||= rand(36**10).to_s(36)
           end
         end
@@ -49,7 +50,11 @@ module Socialite
         def auth_key; :email; end
 
         def locate(search_hash)
-          where(search_hash).first
+          if Hash === search_hash
+            where(search_hash).first
+          else
+            where(:email => search_hash).first
+          end
         end
       end
 

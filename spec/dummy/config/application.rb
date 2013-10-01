@@ -4,13 +4,12 @@ require File.expand_path('../boot', __FILE__)
 require "active_record/railtie"
 require "action_controller/railtie"
 require "action_mailer/railtie"
-require "active_resource/railtie"
+# require "active_resource/railtie"
 require "sprockets/railtie"
 # require "rails/test_unit/railtie"
 
 Bundler.require
 require "socialite"
-require "simple_form" # TODO FIXME remove this dependency all together.
 
 module Dummy
   class Application < Rails::Application

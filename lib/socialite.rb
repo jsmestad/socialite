@@ -4,34 +4,47 @@ require 'socialite/models/user_concern'
 require 'socialite/engine'
 
 module Socialite
+  include ActiveSupport::Configurable
+
+  config_accessor :use_omniauth_identity
+
+  def self.user_class_name
+    @user_class_name || 'User'
+  end
+
+  def self.identity_class_name
+    @identity_class_name || 'Identity'
+  end
+
+  def self.user_class_name=(name)
+    @user_class_name = name
+  end
+
+  def self.identity_class_name=(name)
+    @identity_class_name = name
+  end
+
   def self.setup
     yield self if block_given?
   end
 
-  mattr_accessor :user_class, :identity_class, :providers
+  def self.providers=(providers)
+    @providers = providers
+  end
 
-  def self.providers
-    @@providers ||= []
+  def self.providers;
+    @providers ||= []
   end
 
   def self.provider(klass, *args)
-    @@providers ||= []
-    @@providers << [klass, args]
+    providers << [klass, args]
   end
 
   def self.identity_class
     identity_class_name.try(:constantize)
   end
 
-  def self.identity_class_name
-    @@identity_class.try(:camelize) || 'Identity'
-  end
-
   def self.user_class
     user_class_name.try(:constantize)
-  end
-
-  def self.user_class_name
-    @@user_class.try(:camelize) || 'User'
   end
 end

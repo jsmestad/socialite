@@ -1,9 +1,11 @@
 Socialite::Engine.routes.draw do
-  match '/signup', :to => 'users#new', via: [:get]
-  match '/auth/:provider/callback', :to => 'sessions#create', via: [:post]
+  get '/signup', :to => 'users#new'
+  match '/auth/:provider/callback', :to => 'socialite/sessions#create', :via => [:get, :post]
 
-  match '/logout', :to => 'sessions#destroy', :as => 'logout', via: [:all]
-  match '/login', :to => 'sessions#new', :as => 'login', via: [:get]
+  match '/logout', :to => 'socialite/sessions#destroy', :as => 'logout', :via => [:get, :delete]
+  get '/login', :to => 'sessions#new', :as => 'login'
 
-  resources :users # needed by omniauth-identity
+  namespace :socialite do
+    resources :users # needed by omniauth-identity
+  end
 end

@@ -26,8 +26,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'bcrypt-ruby', '>= 3.0.0'
 
   # Optional Gem Dependencies
-
-  s.add_development_dependency 'simple_form'
+  # s.add_development_dependency 'simple_form'
 
   # Various OmniAuth gems we test against
   s.add_development_dependency 'omniauth-facebook'
