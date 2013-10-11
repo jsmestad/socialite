@@ -1,5 +1,5 @@
 module Socialite
-  class SocialiteController < ::ApplicationController
+  class SocialiteController < ActionController::Base
     layout 'socialite/socialite'
 
     # Override before ensure_user if it's set in the parent app's
