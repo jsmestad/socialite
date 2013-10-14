@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    socialite (0.1.2)
+    socialite (0.2.0)
       bcrypt-ruby
       haml
       omniauth (~> 1.1.0)
