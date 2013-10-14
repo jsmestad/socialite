@@ -1,14 +1,13 @@
-before_install: gem install bundler --pre
+before_install: gem install bundler
 before_script:
   - "psql -c 'create database socialite_test;' -U postgres >/dev/null"
   - "mysql -e 'create database socialite_test;' >/dev/null"
 rvm:
-  - 1.9.2
   - 1.9.3
-  - 2.0.0-rc1
+  - 2.0.0
 script:
-  - rake --quiet db:migrate 
-  - rspec spec
+  - rake --quiet app:db:migrate app:db:test:prepare 
+  - rspec
 env:
   - DB=sqlite
   - DB=mysql
