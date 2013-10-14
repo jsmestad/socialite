@@ -10,7 +10,7 @@ module Socialite
     it { should validate_presence_of(:provider) }
 
     it { should validate_uniqueness_of(:uid).scoped_to(:provider) }
-    it { should validate_uniqueness_of(:provider).scoped_to("#{user_class.table_name.singularize}_id").case_insensitive }
+    it { should validate_uniqueness_of(:provider).scoped_to(:"#{user_class.table_name.singularize}_id").case_insensitive }
 
     describe '.find_or_initialize_by_oauth' do
       let(:auth_hash) do
@@ -38,7 +38,7 @@ module Socialite
           subject { identity_class.find_or_create_from_omniauth(auth_hash) }
 
           before do
-            user.identities.count.should > 0
+            user.identities.count.should_not eql(0)
             identity.user.should be_present
           end
 

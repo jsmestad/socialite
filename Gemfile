@@ -8,7 +8,6 @@ gemspec
 # jquery-rails is used by the dummy application
 gem "jquery-rails"
 
-gem "omniauth-identity", git: 'git://github.com/intridea/omniauth-identity'
 gem "launchy"
 
 # Declare any dependencies that are still in development here instead of in
@@ -20,6 +19,6 @@ gem "launchy"
 # gem 'debugger'
 
 group :travis_ci do
-  gem 'pg', '~> 0.14'
+  gem 'pg', '~> 0.16'
   gem 'mysql2'
 end

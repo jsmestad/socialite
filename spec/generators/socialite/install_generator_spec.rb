@@ -5,9 +5,10 @@ describe Socialite::Generators::InstallGenerator do
   destination File.expand_path("../../../../tmp", __FILE__)
 
   before(:each) do
+    pending
     prepare_destination
     %w(config script).each do |dir|
-      `ln -s #{Rails.root + dir} #{destination_root}`
+      `ln -sf #{Rails.root + dir} #{destination_root}`
     end
   end
 

@@ -1,6 +1,6 @@
 require 'socialite/controllers/helpers'
-require 'socialite/models/identity_concern'
-require 'socialite/models/user_concern'
+# require 'socialite/models/identity_concern'
+# require 'socialite/models/user_concern'
 require 'socialite/engine'
 
 module Socialite
