@@ -26,7 +26,7 @@ Gem::Specification.new do |s|
 
   # Optional Gem Dependencies
 
-  s.add_development_dependency 'simple_form'
+  s.add_development_dependency 'simple_form', '~> 3.0'
 
   # Various OmniAuth gems we test against
   s.add_development_dependency 'omniauth-facebook'

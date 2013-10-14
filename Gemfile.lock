@@ -194,7 +194,7 @@ DEPENDENCIES
   pg (~> 0.16)
   rspec-rails
   shoulda-matchers
-  simple_form
+  simple_form (~> 3.0)
   socialite!
   sqlite3
   yard
