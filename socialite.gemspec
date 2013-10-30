@@ -22,7 +22,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'haml'
   s.add_runtime_dependency 'omniauth', '~> 1.1.0'
   s.add_runtime_dependency 'omniauth-identity'
-  s.add_runtime_dependency 'bcrypt-ruby'
+  s.add_runtime_dependency 'bcrypt-ruby', '~> 3.1.2'
 
   # Optional Gem Dependencies
 
