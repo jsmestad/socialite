@@ -9,3 +9,4 @@ spec/dummy/tmp/
 .yardoc
 doc
 tmp/
+Gemfile.lock
